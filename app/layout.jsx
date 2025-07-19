@@ -1,27 +1,29 @@
-import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
-import theme from './theme'
+import React from 'react'
+import ClientThemeProvider from './components/ClientThemeProvider'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 export const metadata = {
   title: 'OC Robotics',
-  description: 'Your one-stop solution for all things robotics. Explore our latest projects and innovations.',
-  keywords: 'robotics, automation, engineering, innovation, technology',
+  description: 'The OCC Robotics website showcases our expertise in robotics and automation, offering innovative solutions for various industries.',
+  keywords: 'robotics, automation, engineering, innovation, technology, OCC Robotics',
   authors: [{ name: 'OC-Robotics' }],
+  icons: {
+    icon: '/oc-robotics-icon.png',
+  },
+  viewport: 'width=device-width, initial-scale=1',
+  charset: 'utf-8',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" type="image/png" href="/favicon-light.png" id="favicon-default" />
-      </head>
-      <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+      <body suppressHydrationWarning>
+        <ClientThemeProvider>
           <Navbar />
           {children}
-        </ThemeProvider>
+          <Footer />
+        </ClientThemeProvider>
       </body>
     </html>
   )
