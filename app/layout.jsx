@@ -1,7 +1,7 @@
 import React from 'react'
 import ClientThemeProvider from './components/ClientThemeProvider'
-import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import NavBar from './components/Navbar'
 
 export const metadata = {
   title: 'OC Robotics',
@@ -11,20 +11,21 @@ export const metadata = {
   icons: {
     icon: '/oc-robotics-icon.png',
   },
-  viewport: 'width=device-width, initial-scale=1',
   charset: 'utf-8',
 }
+
+export const viewport = 'width=device-width, initial-scale=1';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning>
+      <body>
         <ClientThemeProvider>
-          <Navbar />
+          <NavBar />
           {children}
           <Footer />
         </ClientThemeProvider>
       </body>
     </html>
-  )
+  );
 }

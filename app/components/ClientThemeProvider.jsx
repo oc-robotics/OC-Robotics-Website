@@ -1,15 +1,18 @@
-'use client'
+'use client';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '../emotionCache';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import theme from '../theme'; // adjust path to your theme
 
-import React from 'react'
-import { ThemeProvider } from '@mui/material/styles'
-import { CssBaseline } from '@mui/material'
-import theme from '../theme'
+const clientSideEmotionCache = createEmotionCache();
 
 export default function ClientThemeProvider({ children }) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
-  )
+    <CacheProvider value={clientSideEmotionCache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </CacheProvider>
+  );
 }
