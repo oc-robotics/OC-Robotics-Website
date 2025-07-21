@@ -18,8 +18,51 @@ This website serves as the central hub for the OC Robotics team, featuring:
 - **Language**: JavaScript/JSX
 - **Deployment**: Vercel (configured)
 
-<detail> <summary><strong>## 📁 Next.js File Structure </strong></summary> 
+## 🚀 Getting Started
 
+<details><summary>Prerequisites</summary>
+   
+- Node.js 18+ installed
+- Git installed
+- Code editor (VS Code recommended)
+
+</details>
+<details><summary>Installation</summary>
+   
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/oc-robotics/OC-Robotics-Website.git
+   cd OC-Robotics-Website
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser**
+   - Navigate to `http://localhost:3000`
+
+</details>
+<details><summary>Available Scripts</summary>
+
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm run start   # Start production server
+npm run lint    # Run ESLint
+```
+
+</details>
+
+## 📁 Next.js File Structure
+<details><summary>File Tree</summary>
+   
 ```
 OC-Robotics-Website/
 ├── app/                          # App Router directory (Next.js 13+)
@@ -42,9 +85,10 @@ OC-Robotics-Website/
 ├── eslint.config.mjs           # ESLint configuration
 └── README.md                   # This file
 ```
-</detail>
-### 🌐 How Folders Become Website Pages
-
+   
+</details>
+<details><summary>🌐 How Folders Become Website Pages</summary>
+   
 In Next.js App Router, the folder structure inside `app/` directly maps to your website's URL structure:
 
 | **Folder Path** | **Website URL** | **Purpose** |
@@ -54,8 +98,9 @@ In Next.js App Router, the folder structure inside `app/` directly maps to your 
 | `app/services/page.jsx` | `yourdomain.com/services` | **Services Page** - Robotics services, capabilities, and offerings |
 | `app/contact/page.jsx` | `yourdomain.com/contact` | **Contact Page** - Contact form, team contact info, and location |
 
-### 📂 Adding New Pages
-
+</details>
+<details><summary>📂 Adding New Pages</summary>
+   
 To create a new page, simply:
 
 1. **Create a folder** with the desired URL name
@@ -68,20 +113,19 @@ app/
 │   └── page.jsx       # The actual page content
 ```
 
-This would create a new page accessible at `yourdomain.com/projects`
-
-### 🔧 Special Files in App Router
-
+</details>
+<details><summary>🔧 Special Files in App Router</summary>
+   
 - **`page.jsx`** - The main content for that route
 - **`layout.jsx`** - Shared layout that wraps pages (can exist at any level)
 - **`loading.jsx`** - Loading UI for that route segment
 - **`error.jsx`** - Error handling UI
 - **`not-found.jsx`** - 404 page for that segment
-
-### 🗂️ Nested Routes Example
+   
+</details>
+<details><summary>🗂️ Nested Routes Example</summary>
 
 You can create nested routes with deeper folder structures:
-
 ```
 app/
 ├── projects/
@@ -94,7 +138,8 @@ app/
 │           └── page.jsx           # /projects/categories/robotics
 ```
 
-### Key Next.js App Router Concepts:
+</details>
+<details><summary> Next.js App Router Concepts:</summary>
 
 - **`layout.jsx`** - Shared layout that wraps all pages
 - **`page.jsx`** - Defines a route (folder name becomes the URL path)
@@ -102,53 +147,18 @@ app/
 - **Client Components** - Use `'use client'` for interactivity (hooks, events)
 - **`metadata` export** - SEO and head tags configuration
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ installed
-- Git installed
-- Code editor (VS Code recommended)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/oc-robotics/OC-Robotics-Website.git
-   cd OC-Robotics-Website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**
-   - Navigate to `http://localhost:3000`
-
-### Available Scripts
-
-```bash
-npm run dev     # Start development server
-npm run build   # Build for production
-npm run start   # Start production server
-npm run lint    # Run ESLint
-```
+</details>
 
 ## 📝 Basic Git Operations
 
-### Initial Setup
+<details><summary>Initial Setup</summary>
 ```bash
 # Configure your Git identity (first time only)
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
-
-### Daily Workflow
+</details>
+<details><summary>Daily Workflow</summary>
 
 #### 1. **Before Starting Work**
 ```bash
@@ -200,15 +210,17 @@ git checkout -- filename.jsx
 # View all branches
 git branch -a
 ```
+</details>
 
 ## 🎨 Development Guidelines
 
-### File Organization
+<details><summary>File Organization</summary>
 - Keep components in `app/components/`
 - One component per file
 - Use descriptive file names (`ContactForm.jsx`, not `form.jsx`)
-
-### Component Structure
+</details> 
+<details><summary>Component Structure</summary>
+   
 ```jsx
 // Server Component (default)
 import React from 'react'
@@ -231,9 +243,11 @@ export default function InteractiveComponent() {
   // ... interactive logic
 }
 ```
+</details> 
 
-### When to Use `'use client'`:
+<details><summary>When to Use `'use client'`:</summary>
 - Event handlers (`onClick`, `onChange`)
 - React hooks (`useState`, `useEffect`)
 - Browser APIs (`window`, `localStorage`)
 - Real-time features
+</details> 
