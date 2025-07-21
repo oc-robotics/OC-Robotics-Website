@@ -18,6 +18,48 @@ This website serves as the central hub for the OC Robotics team, featuring:
 - **Language**: JavaScript/JSX
 - **Deployment**: Vercel (configured)
 
+## 🚀 Getting Started
+
+<details><summary>Prerequisites</summary>
+   
+- Node.js 18+ installed
+- Git installed
+- Code editor (VS Code recommended)
+
+</details>
+<details><summary>Installation</summary>
+   
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/oc-robotics/OC-Robotics-Website.git
+   cd OC-Robotics-Website
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser**
+   - Navigate to `http://localhost:3000`
+
+</details>
+<details><summary>Available Scripts</summary>
+
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm run start   # Start production server
+npm run lint    # Run ESLint
+```
+
+</details>
+
 ## 📁 Next.js File Structure
 <details><summary>File Tree</summary>
    
@@ -104,48 +146,6 @@ app/
 - **Server Components** - Default, render on server for better performance
 - **Client Components** - Use `'use client'` for interactivity (hooks, events)
 - **`metadata` export** - SEO and head tags configuration
-
-</details>
-
-## 🚀 Getting Started
-
-<details><summary>Prerequisites</summary>
-   
-- Node.js 18+ installed
-- Git installed
-- Code editor (VS Code recommended)
-
-</details>
-<details><summary>Installation</summary>
-   
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/oc-robotics/OC-Robotics-Website.git
-   cd OC-Robotics-Website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Run development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**
-   - Navigate to `http://localhost:3000`
-
-</details>
-<details><summary>Available Scripts</summary>
-
-```bash
-npm run dev     # Start development server
-npm run build   # Build for production
-npm run start   # Start production server
-npm run lint    # Run ESLint
-```
 
 </details>
 
