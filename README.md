@@ -18,7 +18,7 @@ This website serves as the central hub for the OC Robotics team, featuring:
 - **Language**: JavaScript/JSX
 - **Deployment**: Vercel (configured)
 
-## 📁 Next.js File Structure
+<detail> <summary><strong>## 📁 Next.js File Structure </strong></summary> 
 
 ```
 OC-Robotics-Website/
@@ -42,7 +42,7 @@ OC-Robotics-Website/
 ├── eslint.config.mjs           # ESLint configuration
 └── README.md                   # This file
 ```
-
+</detail>
 ### 🌐 How Folders Become Website Pages
 
 In Next.js App Router, the folder structure inside `app/` directly maps to your website's URL structure:
