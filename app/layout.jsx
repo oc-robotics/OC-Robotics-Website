@@ -1,5 +1,6 @@
 import React from 'react'
 import ClientThemeProvider from './components/ClientThemeProvider'
+// import RootStyleRegistry from './RootStyleRegistry';
 import Footer from './components/Footer'
 import NavBar from './components/Navbar'
 
@@ -20,11 +21,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ClientThemeProvider>
-          <NavBar />
-          {children}
-          <Footer />
-        </ClientThemeProvider>
+          <ClientThemeProvider>
+            <NavBar />
+            {children}
+            <Footer />
+          </ClientThemeProvider>
+        {/* <RootStyleRegistry> */}
       </body>
     </html>
   );
