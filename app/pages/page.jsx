@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import styles from './Markdown.module.css';
-import * as Blogs from './blogs';
+import * as Blogs from './blogs/index.jsx';
 import { Grid, Container, Box, Card, Typography, CardContent } from '@mui/material';
 
 const Page = () => {
@@ -37,7 +37,7 @@ const Page = () => {
     <Container>
       <Box>
         <Grid container spacing={2}>
-          <Grid xs={12} sm={6} md={4}>
+          <Grid>
             <Box>
               {documentList.map((doc, index) => (
                 <Card key={index}>
