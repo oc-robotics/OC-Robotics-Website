@@ -1,3 +1,17 @@
+import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
+import remarkRehype from 'remark-rehype';
+// import rehypeStarryNight from '@microflash/rehype-starry-night';
+
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  mdxOptions: {
+    remarkPlugins: [remarkGfm, remarkRehype],
+    // rehypePlugins: [rehypeStarryNight],
+  },
+});
+
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
@@ -16,6 +30,7 @@ const nextConfig = {
       },
     ],
   },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx'],
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);

@@ -1,21 +1,64 @@
-import ReactMarkdown from 'react-markdown';
+"use client";
+import React from 'react';
+import styles from './Markdown.module.css';
+import * as Blogs from './blogs';
+import { Grid, Container, Box, Card, Typography, CardContent } from '@mui/material';
 
 const Page = () => {
-  const markdown = `
-# Hello, world!
+  const [selectedDoc, setSelectedDoc] = React.useState(null);
 
-This is a simple markdown example.
+  const documentList = [
+    {
+      title: 'Git SSH',
+      description: 'Learn how to set up SSH for Git.',
+      component: Blogs.GitSSH,
+    },
+    {
+      title: "Jason's Portfolio Website",
+      description: 'A modern, responsive portfolio website showcasing my professional journey, skills, and projects.',
+      component: Blogs.JsonWebsiteDoc,
+    },
+    {
+      title: 'Test Table',
+      description: 'A test table for demonstration purposes.',
+      component: Blogs.Test,
+    },
+  ];
 
-- Item 1
-- Item 2
-- Item 3
-`;
+  const handleToggle = (doc) => {
+    if (selectedDoc && selectedDoc.title === doc.title) {
+      setSelectedDoc(null);
+    } else {
+      setSelectedDoc(doc);
+    }
+  };
 
   return (
-    <div>
-      <h1>My Page</h1>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
-    </div>
+    <Container>
+      <Box>
+        <Grid container spacing={2}>
+          <Grid xs={12} sm={6} md={4}>
+            <Box>
+              {documentList.map((doc, index) => (
+                <Card key={index}>
+                  <CardContent onClick={() => handleToggle(doc)}>
+                    <Typography variant="h6">{doc.title}</Typography>
+                    <Typography variant="body2">
+                      {doc.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
+            </Box>
+          </Grid>
+        </Grid>
+        {selectedDoc && (
+          <Box className={styles['markdown-body']}>
+            <selectedDoc.component />
+          </Box>
+        )}
+      </Box>
+    </Container>
   );
 };
 
