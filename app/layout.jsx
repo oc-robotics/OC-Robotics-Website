@@ -2,6 +2,8 @@ import React from 'react'
 import ClientThemeProvider from './components/ClientThemeProvider'
 import Footer from './components/Footer'
 import NavBar from './components/Navbar'
+import '@primer/css/index.scss'
+import './styles/codeBlock.css'
 
 export const metadata = {
   title: 'OC Robotics',
