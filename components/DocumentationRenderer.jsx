@@ -1,6 +1,7 @@
+'use client'
 import { MDXRemote } from 'next-mdx-remote'
 import { Card, CardContent, Typography, Box } from '@mui/material'
-import './Markdown.module.css'
+import '@/app/pages/Markdown.module.css'
 
 export default function DocumentationRenderer({ frontmatter, source }) {
   return (

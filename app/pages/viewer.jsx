@@ -1,11 +1,12 @@
 "use client"
 import React from 'react'
+import { useState } from 'react'
 import { Container, Grid, Box, Card, Typography, CardContent, Collapse } from '@mui/material'
 import { MDXRemote } from 'next-mdx-remote'
 import styles from './Markdown.module.css'
 
 export default function Viewer({ documentList }) {
-	const [selectedDoc, setSelectedDoc] = React.useState(null)
+	const [selectedDoc, setSelectedDoc] = useState(null)
 
 	const handleToggle = (doc) => {
 		setSelectedDoc(prev =>
