@@ -1,4 +1,3 @@
-// app/documentation/[slug]/page.jsx
 import fs from "fs";
 import path from "path";
 import { serialize } from "next-mdx-remote/serialize";
@@ -7,7 +6,7 @@ import DocumentationRenderer from "@/components/DocumentationRenderer";
 import remarkGfm from "remark-gfm";
 import remarkEmbedImages from "remark-embed-images";
 import rehypeStarryNight from "rehype-starry-night";
-// (You can drop rehype-mdx-import-media if you don’t need local media imports)
+import rehypeFixClassAttribute from "@/lib/rehypeFixClassAttribute";
 
 export async function generateStaticParams() {
   const docsDir = path.join(process.cwd(), "documentation");
@@ -21,7 +20,7 @@ export default async function Page({ params }) {
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkEmbedImages],
-      rehypePlugins: [rehypeStarryNight],
+      rehypePlugins: [rehypeStarryNight, rehypeFixClassAttribute],
       format: "mdx",
     },
   });

@@ -57,3 +57,10 @@
   color: #0366d6;
   text-decoration: underline;
 }
+
+.markdown-body img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
