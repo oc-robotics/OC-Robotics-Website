@@ -1,65 +1,31 @@
-"use client";
-import React from 'react';
-import styles from './Markdown.module.css';
-import * as Blogs from './blogs/index.jsx';
-import { Grid, Container, Box, Card, Typography, CardContent } from '@mui/material';
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { serialize } from 'next-mdx-remote/serialize'
+import remarkGfm from 'remark-gfm'
+import rehypeStarryNight from 'rehype-starry-night'
+import Viewer from './viewer' // <- your client component
 
-const Page = () => {
-  const [selectedDoc, setSelectedDoc] = React.useState(null);
+export default async function Page() {
+  const docsDir = path.join(process.cwd(), 'documentation')
+  const files = fs.readdirSync(docsDir)
 
-  const documentList = [
-    {
-      title: 'Git SSH',
-      description: 'Learn how to set up SSH for Git.',
-      component: Blogs.GitSSH,
-    },
-    {
-      title: "Jason's Portfolio Website",
-      description: 'A modern, responsive portfolio website showcasing my professional journey, skills, and projects.',
-      component: Blogs.JsonWebsiteDoc,
-    },
-    {
-      title: 'Test Table',
-      description: 'A test table for demonstration purposes.',
-      component: Blogs.Test,
-    },
-  ];
+  const documentList = await Promise.all(
+    files
+      .filter(file => file.endsWith('.mdx'))
+      .map(async (file) => {
+        const slug = file.replace(/\.mdx$/, '')
+        const rawContent = fs.readFileSync(path.join(docsDir, file), 'utf8')
+        const { data: frontmatter, content } = matter(rawContent)
+        const source = await serialize(content, {
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [rehypeStarryNight],
+          },
+        })
+        return { slug, frontmatter, source }
+      })
+  )
 
-  const handleToggle = (doc) => {
-    if (selectedDoc && selectedDoc.title === doc.title) {
-      setSelectedDoc(null);
-    } else {
-      setSelectedDoc(doc);
-    }
-  };
-
-  return (
-    <Container>
-      <Box>
-        <Grid container spacing={2}>
-          <Grid>
-            <Box>
-              {documentList.map((doc, index) => (
-                <Card key={index}>
-                  <CardContent onClick={() => handleToggle(doc)}>
-                    <Typography variant="h6">{doc.title}</Typography>
-                    <Typography variant="body2">
-                      {doc.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))}
-            </Box>
-          </Grid>
-        </Grid>
-        {selectedDoc && (
-          <Box className={styles['markdown-body']}>
-            <selectedDoc.component />
-          </Box>
-        )}
-      </Box>
-    </Container>
-  );
-};
-
-export default Page;
+  return <Viewer documentList={documentList} />
+}
