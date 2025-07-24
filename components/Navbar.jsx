@@ -12,6 +12,7 @@ function Navbar() {
             <Button component={Link} href="/" color="inherit">Home</Button>
             <Button component={Link} href="/about" color="inherit">About</Button>
             <Button component={Link} href="/contact" color="inherit">Contact</Button>
+            <Button component={Link} href="/projects" color="inherit">Projects</Button>
             <Button component={Link} href="/pages" color="inherit">Page</Button>
           </Toolbar>
         </Container>
