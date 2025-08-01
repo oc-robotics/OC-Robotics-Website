@@ -20,7 +20,7 @@ export default async function Page({ params }) {
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkEmbedImages],
-      rehypePlugins: [rehypeStarryNight, rehypeFixClassAttribute],
+      rehypePlugins: [rehypeStarryNight],
       format: "mdx",
     },
   });
