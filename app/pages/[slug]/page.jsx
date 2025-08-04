@@ -6,7 +6,6 @@ import DocumentationRenderer from "@/components/DocumentationRenderer";
 import remarkGfm from "remark-gfm";
 import remarkEmbedImages from "remark-embed-images";
 import rehypeStarryNight from "rehype-starry-night";
-import rehypeFixClassAttribute from "@/lib/rehypeFixClassAttribute";
 
 export async function generateStaticParams() {
   const docsDir = path.join(process.cwd(), "documentation");
@@ -25,5 +24,11 @@ export default async function Page({ params }) {
     },
   });
 
-  return <DocumentationRenderer frontmatter={frontmatter} source={mdxSource} />;
-}
+  return (
+    <DocumentationRenderer 
+      frontmatter={frontmatter} 
+      source={mdxSource} 
+      components={{ Admonitions }} 
+    />
+  );
+} 

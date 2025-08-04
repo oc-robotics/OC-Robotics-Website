@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import { serialize } from 'next-mdx-remote/serialize'
 import remarkGfm from 'remark-gfm'
 import rehypeStarryNight from 'rehype-starry-night'
-import Viewer from './viewer' // <- your client component
+import Viewer from './viewer'
 
 export default async function Page() {
   const docsDir = path.join(process.cwd(), 'documentation')

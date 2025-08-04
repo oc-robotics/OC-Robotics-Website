@@ -1,0 +1,33 @@
+.admonition-info {
+  background-color: #e7f3fe;
+  border-left: 4px solid #2196f3;
+  padding: 10px;
+  margin: 1em 0;
+}
+
+.admonition-warning {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 10px;
+  margin: 1em 0;
+}
+
+.admonition-error {
+  background-color: #f8d7da;
+  border-left: 4px solid #dc3545;
+  padding: 10px;
+  margin: 1em 0;
+}
+
+.admonition-important {
+  background-color: #d1ecf1;
+  border-left: 4px solid #17a2b8;
+  padding: 10px;
+  margin: 1em 0;
+}
+
+.admonition {
+  margin: 1em 0;
+  padding: 10px;
+  border-radius: 4px;
+}

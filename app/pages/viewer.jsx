@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Container, Grid, Box, Card, Typography, CardContent, Collapse } from '@mui/material'
 import { MDXRemote } from 'next-mdx-remote'
 import styles from './Markdown.module.css'
+import Admonitions from '@/components/Admonitions.jsx'
 
 export default function Viewer({ documentList }) {
 	const [selectedDoc, setSelectedDoc] = useState(null)
@@ -15,7 +16,7 @@ export default function Viewer({ documentList }) {
 	}
 
 	const customComponents = {
-		// Add your MDX components here
+		Admonitions,
 	}
 
 	return (
