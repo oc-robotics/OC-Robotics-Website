@@ -2,10 +2,11 @@ import fs from "fs";
 import path from "path";
 import { serialize } from "next-mdx-remote/serialize";
 import { getPost } from "@/lib/getPost";
-import DocumentationRenderer from "@/components/DocumentationRenderer";
+import DocumentationRenderer from "@/components/DocumentationRenderer.jsx";
 import remarkGfm from "remark-gfm";
 import remarkEmbedImages from "remark-embed-images";
-import rehypeStarryNight from "rehype-starry-night";
+import rehypePrettyCode from "rehype-pretty-code";
+import '@/styles/codeBlock.css';
 
 export async function generateStaticParams() {
   const docsDir = path.join(process.cwd(), "documentation");
@@ -19,7 +20,7 @@ export default async function Page({ params }) {
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkEmbedImages],
-      rehypePlugins: [rehypeStarryNight],
+      rehypePlugins: [rehypePrettyCode],
       format: "mdx",
     },
   });
@@ -27,8 +28,7 @@ export default async function Page({ params }) {
   return (
     <DocumentationRenderer 
       frontmatter={frontmatter} 
-      source={mdxSource} 
-      components={{ Admonitions }} 
+      source={mdxSource}
     />
   );
 } 

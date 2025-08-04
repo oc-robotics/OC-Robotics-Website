@@ -3,8 +3,15 @@ import path from 'path'
 import matter from 'gray-matter'
 import { serialize } from 'next-mdx-remote/serialize'
 import remarkGfm from 'remark-gfm'
-import rehypeStarryNight from 'rehype-starry-night'
 import Viewer from './viewer'
+import rehypePrettyCode from 'rehype-pretty-code'
+
+const options={
+  theme: 'github-light', // or 'dark'
+  defaultLanguage: "plaintext",
+  autoHeight: true,
+}
+
 
 export default async function Page() {
   const docsDir = path.join(process.cwd(), 'documentation')
@@ -20,7 +27,7 @@ export default async function Page() {
         const source = await serialize(content, {
           mdxOptions: {
             remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeStarryNight],
+            rehypePlugins: [[rehypePrettyCode, options]],
           },
         })
         return { slug, frontmatter, source }

@@ -26,13 +26,11 @@
   margin: 1em 0 1em 2em;
 }
 .markdown-body pre {
-  background: #f6f8fa;
   padding: 1em;
   border-radius: 6px;
   overflow-x: auto;
 }
 .markdown-body code {
-  background: #f6f8fa;
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.95em;
