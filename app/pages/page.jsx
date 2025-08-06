@@ -5,6 +5,7 @@ import { serialize } from 'next-mdx-remote/serialize'
 import remarkGfm from 'remark-gfm'
 import Viewer from './viewer'
 import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
 
 const options={
   theme: 'github-light', // or 'dark'
@@ -27,7 +28,7 @@ export default async function Page() {
         const source = await serialize(content, {
           mdxOptions: {
             remarkPlugins: [remarkGfm],
-            rehypePlugins: [[rehypePrettyCode, options]],
+            rehypePlugins: [[rehypePrettyCode, options], rehypeSlug],
           },
         })
         return { slug, frontmatter, source }

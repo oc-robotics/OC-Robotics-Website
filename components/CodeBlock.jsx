@@ -10,22 +10,6 @@ export default function CodeBlock({ children, ...props }) {
   const codeRef = useRef(null);
   const [copied, setCopied] = useState(false);
 
-  const action = (
-    <React.Fragment>
-      <IconButton size="small" aria-label="close" color="inherit" onClick={() => setCopied(false)}>
-        <Close fontSize="small" sx={{
-            borderRadius: '50%',
-            '&:hover': {
-                color: 'red',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                transform: 'scale(1.1)',
-                transition: 'color 0.3s ease, transform 0.3s ease, background-color 0.3s ease',
-            }
-        }} />
-      </IconButton>
-    </React.Fragment>
-  );
-
   const handleCopy = () => {
     if (codeRef.current) {
       navigator.clipboard.writeText(codeRef.current.innerText);

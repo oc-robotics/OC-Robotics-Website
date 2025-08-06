@@ -19,9 +19,7 @@ export default function Viewer({ documentList }) {
 
 	const customComponents = {
 		Admonitions,
-		// figure: (props) => <CodeBlock {...props} />,
 		pre: (props) => <CodeBlock {...props} />,
-		// code: (props) => <CodeBlock {...props} />,
 	}
 
 	return (

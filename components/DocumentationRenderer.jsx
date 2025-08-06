@@ -4,6 +4,8 @@ import { Card, CardContent, Typography, Box } from '@mui/material'
 import '@/app/pages/Markdown.module.css'
 
 export default function DocumentationRenderer({ frontmatter, source }) {
+  console.log("Source:", source)
+  
   return (
     <Card sx={{ marginBottom: 4 }}>
       <CardContent>

@@ -6,6 +6,7 @@ import DocumentationRenderer from "@/components/DocumentationRenderer.jsx";
 import remarkGfm from "remark-gfm";
 import remarkEmbedImages from "remark-embed-images";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 import '@/styles/codeBlock.css';
 
 export async function generateStaticParams() {
@@ -20,7 +21,7 @@ export default async function Page({ params }) {
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkEmbedImages],
-      rehypePlugins: [rehypePrettyCode],
+      rehypePlugins: [rehypeSlug, rehypePrettyCode],
       format: "mdx",
     },
   });
