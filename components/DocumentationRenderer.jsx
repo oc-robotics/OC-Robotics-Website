@@ -1,22 +1,27 @@
 'use client'
 import { MDXRemote } from 'next-mdx-remote'
 import { Card, CardContent, Typography, Box } from '@mui/material'
-import '@/app/pages/Markdown.module.css'
+import Admonitions from '@/components/Admonitions.jsx'
+import CodeBlock from '@/components/CodeBlock.jsx'
+import { h1Link, h2Link, h3Link } from '@/components/HeaderLinks.jsx'
+import React from 'react'
+import '@/styles/codeBlock.css'
+import styles from '@/app/pages/Markdown.module.css'
 
 export default function DocumentationRenderer({ frontmatter, source }) {
-  console.log("Source:", source)
+  const customComponents = {
+      Admonitions,
+      pre: (props) => <CodeBlock {...props} />,
+      h1: h1Link,
+      h2: h2Link,
+      h3: h3Link,
+    }
   
   return (
     <Card sx={{ marginBottom: 4 }}>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
-          {frontmatter.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" gutterBottom>
-          {frontmatter.description}
-        </Typography>
-        <Box className="markdown-body" sx={{ marginTop: 3 }}>
-          <MDXRemote {...source} />
+        <Box className={styles["markdown-body"]} sx={{ marginTop: 3 }}>
+          <MDXRemote {...source} components={customComponents} />
         </Box>
       </CardContent>
     </Card>

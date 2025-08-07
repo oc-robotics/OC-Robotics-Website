@@ -8,6 +8,13 @@ import remarkEmbedImages from "remark-embed-images";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import '@/styles/codeBlock.css';
+import Viewer from "../viewer";
+
+const options={
+  theme: 'github-light', // or 'dark'
+  defaultLanguage: "plaintext",
+  autoHeight: true,
+}
 
 export async function generateStaticParams() {
   const docsDir = path.join(process.cwd(), "documentation");
@@ -16,20 +23,18 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
+  params = await params
   const { frontmatter, content } = getPost(params.slug);
 
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkEmbedImages],
-      rehypePlugins: [rehypeSlug, rehypePrettyCode],
+      rehypePlugins: [rehypeSlug, [rehypePrettyCode, options]],
       format: "mdx",
     },
   });
 
   return (
-    <DocumentationRenderer 
-      frontmatter={frontmatter} 
-      source={mdxSource}
-    />
+    <DocumentationRenderer frontmatter={frontmatter} source={mdxSource} />
   );
 } 
