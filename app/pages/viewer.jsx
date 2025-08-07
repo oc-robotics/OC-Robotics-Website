@@ -7,6 +7,7 @@ import '@/styles/codeBlock.css'
 import styles from './Markdown.module.css'
 import Admonitions from '@/components/Admonitions.jsx'
 import CodeBlock from '@/components/CodeBlock.jsx'
+import { h1Link, h2Link, h3Link } from '@/components/HeaderLinks.jsx'
 
 export default function Viewer({ documentList }) {
 	const [selectedDoc, setSelectedDoc] = useState(null)
@@ -20,7 +21,26 @@ export default function Viewer({ documentList }) {
 	const customComponents = {
 		Admonitions,
 		pre: (props) => <CodeBlock {...props} />,
+		h1: h1Link,
+		h2: h2Link,
+		h3: h3Link,
 	}
+
+	// Smooth scroll to anchor after document is rendered
+	React.useEffect(() => {
+		if (selectedDoc) {
+			const hash = window.location.hash;
+			if (hash) {
+				// Wait for collapse animation to finish
+				setTimeout(() => {
+					const el = document.getElementById(hash.substring(1));
+					if (el) {
+						el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					}
+				}, 300); // Adjust delay as needed for Collapse
+			}
+		}
+	}, [selectedDoc]);
 
 	return (
 		<Container sx={{ marginTop: 4 }}>
