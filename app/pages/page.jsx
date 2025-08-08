@@ -1,22 +1,25 @@
-import ReactMarkdown from 'react-markdown';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import React from 'react';
+import DefaultDocument from './defaultDocument';
 
-const Page = () => {
-  const markdown = `
-# Hello, world!
-
-This is a simple markdown example.
-
-- Item 1
-- Item 2
-- Item 3
-`;
+export default async function Pages() {
+  const docsDir = path.join(process.cwd(), "documentation");
+  const files = fs.readdirSync(docsDir).filter((f) => f.endsWith(".mdx"));
+  
+  const documentList = await Promise.all(
+    files
+      .filter(file => file.endsWith('.mdx'))
+      .map(async (file) => {
+        const rawContent = fs.readFileSync(path.join(docsDir, file), 'utf8')
+        const { data: frontmatter } = matter(rawContent)
+        const slug = file.replace(/\.mdx$/, '')
+        return { slug, frontmatter }
+      })
+  )
 
   return (
-    <div>
-      <h1>My Page</h1>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
-    </div>
+    <DefaultDocument documentList={documentList} />
   );
-};
-
-export default Page;
+}

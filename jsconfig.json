@@ -1,37 +1,35 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
-    "incremental": true,
     "module": "esnext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "forceConsistentCasingInFileNames": true,
+    "plugins": [{ "name": "next" }],
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+      "@/app/*": ["./app/*"],
+      "@/documentation/*": ["./documentation/*"],
+      "@/components/*": ["./components/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/lib/*": ["./lib/*"]
+    }
   },
   "include": [
     "**/*.js",
     "**/*.jsx",
+    "**/*.mjs",
     "src/**/*.js",
-    "src/**/*.jsx"
+    "src/**/*.jsx",
+    "next.config.mjs"
   ],
   "exclude": [
     "node_modules"

@@ -1,8 +1,7 @@
 import React from 'react'
-import ClientThemeProvider from './components/ClientThemeProvider'
-// import RootStyleRegistry from './RootStyleRegistry';
-import Footer from './components/Footer'
-import NavBar from './components/Navbar'
+import ClientThemeProvider from '@/components/ClientThemeProvider'
+import Footer from '@/components/Footer'
+import NavBar from '@/components/Navbar'
 
 export const metadata = {
   title: 'OC Robotics',
