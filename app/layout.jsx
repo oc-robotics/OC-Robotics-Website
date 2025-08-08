@@ -20,11 +20,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ClientThemeProvider>
-          <NavBar />
-          {children}
-          <Footer />
-        </ClientThemeProvider>
+          <ClientThemeProvider>
+            <NavBar />
+            {children}
+            <Footer />
+          </ClientThemeProvider>
+        {/* <RootStyleRegistry> */}
       </body>
     </html>
   );
