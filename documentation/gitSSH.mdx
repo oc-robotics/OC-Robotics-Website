@@ -1,15 +1,13 @@
 ---
-title: "Setting Up Git, GitHub, and SSH"
+title: Setting Up Git, GitHub, and SSH
 date: 2025-07-20
 ---
 
-# Setting Up Git, GitHub, and SSH 
-
-## Resources
+# Resources
 - [HowToForge | Installing and using Git and GitHub on Ubuntu Linux](https://www.howtoforge.com/tutorial/install-git-and-github-on-ubuntu/) 
 - [TOP | Setting up Git](https://www.theodinproject.com/lessons/foundations-setting-up-git#introduction) 
 
-## Table of Contents
+# Table of Contents
 + [Install Git](#install-git)
   + [Installing on Windows](#installing-on-windows)
   + [Installing on Linux](#installing-on-linux)
@@ -22,9 +20,9 @@ date: 2025-07-20
 + [Pushing files from a local repository to a GitHub repository](#pushing-files-from-a-local-repository-to-a-github-repository)
 + [Creating an SSH Key](#creating-an-ssh-key)
 
-## Install Git
+# Install Git
 
-### Installing on Windows
+## Installing on Windows
 
 - Install [Git for Windows](https://gitforwindows.org/), which provides Git Bash (terminal emulator for running Git commands)
   
@@ -36,14 +34,14 @@ winget install --id Git.Git -e --source winget
 - You can also install Linux for Windows via [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/install)
   - Once setup, Git can be installed using the Linux package manager
 
-### Installing on Linux
+## Installing on Linux
 https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 - Install Git
   ```bash
   sudo apt install git
   ```
 
-## Configure Git
+# Configure Git
 - Configure Git, replacing `"Your name"` and `"your.email@example.com"` with your info (including the quotes) to link your local Git profile with GitHub
 
   ```bash
@@ -60,8 +58,8 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
   git config --list
   ```
 
-## Basic Git Workflow Example
-### Creating a local repository
+# Basic Git Workflow Example
+## Creating a local repository
 - Create a local repository `myTest` and change the current working directory to `myTest`:
   
   ```bash
@@ -107,7 +105,7 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
   }
   ```
 
-### Staging Files in the Git Index
+## Staging Files in the Git Index
 
 - Create and add files to the index. 
 
@@ -115,13 +113,13 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
   git add README.md
   git add sample.c
   ```
-### Committing changes made to the index
+## Committing changes made to the index
 - Commit the changes with a message:
 
   ```bash
   git commit -m "Initial commit"
   ```
-##  Creating a repository on GitHub
+#  Creating a repository on GitHub
 - Create a repository on GitHub with the same name as your local repository (e.g., "Mytest").
 ![picture 0](https://i.imgur.com/6hpahg2.png)
 - Connect your local repository to the GitHub repository (Replace `'user_name'` with your GitHub username):
@@ -135,7 +133,7 @@ https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 git remote add origin git@github.com:user_name/Mytest.git
 ```
 
-## Pushing files from a local repository to a GitHub repository
+# Pushing files from a local repository to a GitHub repository
 - Push the local repository contents to GitHub
   - The first time running this command, you need to link the local `master` branch to the `master` branch on remote repository (`origin`)
 
@@ -163,7 +161,7 @@ git push origin master
   git config --global color.ui auto
   ```
 ---
-## Creating an SSH Key
+# Creating an SSH Key
 [Create an SSH key](https://www.theodinproject.com/lessons/foundations-setting-up-git#step-23-create-an-ssh-key)
 ![ssh diagram](https://www.ssh.com/hubfs/Imported_Blog_Media/SSH_simplified_protocol_diagram-2.png)
 

@@ -1,5 +1,5 @@
 // "use client";
-import {Box, Collapse, Container, Grid, Card, CardContent, Typography, Button, List, ListItem} from '@mui/material'
+import {Container, Typography, Button, List, ListItem} from '@mui/material'
 import Link from 'next/link';
 import React from 'react';
 import fs from 'fs';
@@ -10,7 +10,7 @@ export default function Pages() {
   const files = fs.readdirSync(docsDir).filter(file => file.endsWith('.mdx'));
 
   return (
-    <Container>
+    <Container sx={{m: 0, p: 0}}>
       <Typography variant="h1" sx={{ marginBottom: 2 }}>
         Documentations
       </Typography>
@@ -18,7 +18,7 @@ export default function Pages() {
         {files.map(file => {
           const slug = file.replace(/\.mdx$/, '');
           return (
-            <ListItem key={slug}>
+            <ListItem key={slug} sx={{ display: 'inline-block', marginRight: 2 }}>
               <Button component={Link} href={`/pages/${slug}`}>{slug}</Button>
             </ListItem>
           );
