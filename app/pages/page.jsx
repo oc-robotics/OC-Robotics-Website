@@ -1,13 +1,8 @@
-// "use client";
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import {Container, Typography, Button, List, ListItem, Box, Paper, Tooltip} from '@mui/material'
-import Link from 'next/link';
 import React from 'react';
-import BackToTopButton from '@/components/BackToTopButton';
-import styles from '@/styles/markdown.module.css';
-import { KeyboardArrowUp } from '@mui/icons-material';
+import DefaultDocument from './defaultDocument';
 
 export default async function Pages() {
   const docsDir = path.join(process.cwd(), "documentation");
@@ -23,19 +18,8 @@ export default async function Pages() {
         return { slug, frontmatter }
       })
   )
+
   return (
-    <Container>
-      <List>
-        {documentList.map(doc => {
-          const slug = doc.slug;
-          return (
-            <ListItem key={slug} sx={{ display: 'inline-block', marginRight: 2 }}>
-              <Button component={Link} href={`/pages/${slug}`}>{doc.frontmatter.title || slug}</Button>
-            </ListItem>
-          );
-        })}
-      </List>
-      <BackToTopButton />
-    </Container>
+    <DefaultDocument documentList={documentList} />
   );
 }
