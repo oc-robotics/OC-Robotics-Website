@@ -2,14 +2,15 @@
 import { MDXRemote } from 'next-mdx-remote'
 import { Container, Typography, Paper, Box, Tooltip } from '@mui/material'
 import { KeyboardArrowUp } from '@mui/icons-material'
-import Admonitions from '@/components/Admonitions.jsx'
-import CodeBlock from '@/components/CodeBlock.jsx'
-import { h1Link, h2Link, h3Link } from '@/components/HeaderLinks.jsx'
+import Admonitions from '@/components/MarkdownComponents/Admonitions.jsx'
+import CodeBlock from '@/components/MarkdownComponents/CodeBlock.jsx'
+import { h1Link, h2Link, h3Link } from '@/components/MarkdownComponents/HeaderLinks.jsx'
 import React from 'react'
 import '@/styles/codeBlock.css'
 import styles from '@/styles/markdown.module.css'
 import Sidebar from './TableOfContents'
 import DocumentListSideBar from './DocumentListSideBar'
+import BackToTopButton from '../BackToTopButton'
 
 export default function DocumentationRenderer({ frontmatter, source, toc, documentList }) {
   const customComponents = {
@@ -40,33 +41,12 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
         <Typography variant="subtitle1" color="textSecondary" gutterBottom sx={{ml: 2}}>
           {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString() : ""}
         </Typography>
-        <Paper className={styles["markdown-body"]} sx={{ marginTop: 3, px: 2 }}>
+        <Paper className={styles["markdown-body"]} sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
           <MDXRemote {...source} components={customComponents} />
         </Paper>
       </Box>
       <Sidebar toc={toc} />
-      <Box sx={{
-        width: "45px",
-        height: "45px",
-        position: "fixed",
-        bottom: "32px",
-        right: "32px",
-        backgroundColor: "#0080ffff",
-        borderRadius: "50%",
-      }}>
-        <Tooltip title="Back to top" arrow>
-          <KeyboardArrowUp
-            sx={{
-              color: "white",
-              fontSize: "45px",
-              cursor: "pointer"
-            }}
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          />
-        </Tooltip>
-      </Box>
+      <BackToTopButton />
     </Container>
   )
 }

@@ -12,7 +12,9 @@ function DocumentListSideBar({ documentList }) {
         {documentList.map((doc, index) => (
           <ListItem key={index} sx={{ marginBottom: '10px' }}>
             <Link href={`/pages/${doc.slug}`} style={{ textDecoration: 'none', color: '#333' }}>
-              {doc.slug}
+              <Typography variant="body2">
+                {doc.frontmatter.title || doc.slug}
+              </Typography>
             </Link>
           </ListItem>
         ))}

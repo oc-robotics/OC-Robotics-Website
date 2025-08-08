@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import { getPost } from "@/lib/getPost";
-import DocumentationRenderer from "@/components/DocumentationRenderer.jsx";
+import DocumentationRenderer from "@/components/MarkdownComponents/DocumentationRenderer.jsx";
 import remarkGfm from "remark-gfm";
 import remarkEmbedImages from "remark-embed-images";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -51,8 +52,10 @@ export default async function Page({ params }) {
     files
       .filter(file => file.endsWith('.mdx'))
       .map(async (file) => {
+        const rawContent = fs.readFileSync(path.join(docsDir, file), 'utf8')
+        const { data: frontmatter } = matter(rawContent)
         const slug = file.replace(/\.mdx$/, '')
-        return { slug }
+        return { slug, frontmatter }
       })
   )
 
