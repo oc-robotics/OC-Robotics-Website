@@ -7,7 +7,7 @@ import CodeBlock from '@/components/CodeBlock.jsx'
 import { h1Link, h2Link, h3Link } from '@/components/HeaderLinks.jsx'
 import React from 'react'
 import '@/styles/codeBlock.css'
-import styles from '@/app/pages/Markdown.module.css'
+import styles from '@/styles/markdown.module.css'
 import Sidebar from './TableOfContents'
 import DocumentListSideBar from './DocumentListSideBar'
 
