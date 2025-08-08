@@ -24,7 +24,12 @@ function DefaultDocument({ documentList }) {
             onClick={() => window.location.href = `/pages/${slug}`}
             sx={{ 
                 display: 'inline-block', 
-                marginRight: 2 
+                marginRight: 2,
+                '&:hover': {
+                  cursor: 'pointer',
+                  transform: 'scale(1.05)',
+                  boxShadow: 4,
+                }
             }}
           >
             <CardContent>

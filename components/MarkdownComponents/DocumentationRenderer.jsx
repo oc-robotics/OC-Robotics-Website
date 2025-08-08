@@ -28,20 +28,20 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
       justifyContent: 'space-between',
       m: 0,
       p: 0,
-      px: 2,
       mt: 3,
-      width: '100%',
+      width: '100vw',
       mx: 'auto'
     }}>
-      <DocumentListSideBar documentList={documentList} style={{ width: '25%' }} />
+      <DocumentListSideBar documentList={documentList} style={{ width: '40%' }} />
       <Box sx={{ flexGrow: 1, px: 2 }}>
-        <Typography variant="h4" gutterBottom>
+        
+        <Paper className={styles["markdown-body"]} sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
+          <Typography variant="h4" gutterBottom>
           {frontmatter.title}
         </Typography>
         <Typography variant="subtitle1" color="textSecondary" gutterBottom sx={{ml: 2}}>
           {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString() : ""}
         </Typography>
-        <Paper className={styles["markdown-body"]} sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
           <MDXRemote {...source} components={customComponents} />
         </Paper>
       </Box>

@@ -8,39 +8,82 @@ import {
   Box,
   Menu,
   MenuItem,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 import Link from 'next/link';
 
 function Navbar() {
-  const [state, setState] = useState({
-    open: false,
-    anchorEl: null,
-  });
+  const [anchorEl, setAnchorEl] = useState(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleClick = event => {
-    setState({
-      open: true,
-      anchorEl: event.currentTarget,
-    })
-  }
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  const handleClose = () => {
-    setState({
-      open: false,
-      anchorEl: null,
-    })
-  }
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuItems = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Pages', href: '/pages' },
+  ];
 
   return (
     <Box>
       <AppBar position="static">
         <Container>
           <Toolbar>
-            <Button component={Link} href="/" color="inherit">Home</Button>
-            <Button component={Link} href="/about" color="inherit">About</Button>
-            <Button component={Link} href="/contact" color="inherit">Contact</Button>
-            <Button component={Link} href="/projects" color="inherit">Projects</Button>
-            <Button component={Link} href="/pages" color="inherit">Pages</Button>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              OC Robotics
+            </Typography>
+            
+            {isMobile ? (
+              <>
+                <IconButton
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={handleMenuOpen}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                >
+                  {menuItems.map((item) => (
+                    <MenuItem key={item.label} component={Link} href={item.href} onClick={handleMenuClose}>
+                      {item.label}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
+            ) : (
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                {menuItems.map((item) => (
+                  <Button key={item.label} component={Link} href={item.href} color="inherit">
+                    {item.label}
+                  </Button>
+                ))}
+              </Box>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
