@@ -1,4 +1,4 @@
-import { IconButton, Slide, Snackbar, Alert } from '@mui/material';
+import { IconButton, Slide, Snackbar, Alert, Button, Box } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import {Close, CheckRounded, ContentCopyRounded } from '@mui/icons-material';
 
@@ -19,11 +19,11 @@ export default function CodeBlock({ children, ...props }) {
   };
   
   return (
-    <div style={{ position: 'relative' }}>
-      <button
+    <Box style={{ position: 'relative' }}>
+      <Button
         onClick={handleCopy}
         className="copy-btn"
-        style={{
+        sx={{
           position: 'absolute',
           top: 8,
           right: 8,
@@ -32,11 +32,15 @@ export default function CodeBlock({ children, ...props }) {
           border: 'none',
           borderRadius: 4,
           padding: '2px 8px',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          border: copied ? '1px solid green' : '1px solid #ccc',
+          borderRadius: '4px',
+          '&:hover': { background: '#ddd' },
+          minWidth: '32px',
         }}
       >
         {copied ? <CheckRounded fontSize="small" sx={{ color: 'green' }} /> : <ContentCopyRounded fontSize="small" />}
-      </button>
+      </Button>
       <pre {...props} style={{ margin: 0 }}>
         {React.cloneElement(children, { ref: codeRef })}
       </pre>
@@ -55,6 +59,6 @@ export default function CodeBlock({ children, ...props }) {
           Code copied to clipboard
         </Alert>
       </Snackbar>
-    </div>
+    </Box>
   );
 }

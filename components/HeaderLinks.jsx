@@ -35,6 +35,7 @@ export const h1Link = ({ id, ...rest }) => {
                     textDecoration: 'none', 
                     color: 'inherit',
                     marginRight: '10px', 
+                    cursor: 'default'
                 }}>
                     <Typography variant="h1" id={id} {...rest} sx={{width: 'auto', m: 0}}/>
                 </Link>
@@ -72,7 +73,8 @@ export const h2Link = ({ id, ...rest }) => {
                 <Link href={`#${id}`} style={{ 
                     textDecoration: 'none', 
                     color: 'inherit',
-                    marginRight: '10px', 
+                    marginRight: '10px',
+                    cursor: 'default'
                 }}>
                     <Typography variant="h2" id={id} {...rest} sx={{width: 'auto', margin: 0}}/>
                 </Link>
@@ -111,16 +113,18 @@ export const h3Link = ({ id, ...rest }) => {
                     textDecoration: 'none', 
                     color: 'inherit',
                     marginRight: '10px', 
+                    cursor: 'default'
                 }}>
-                    <Typography variant="h3" id={id} {...rest} sx={{width: 'auto', margin: 0}}/>
+                    <Typography variant="h3" id={id} {...rest} sx={{width: 'auto', margin: 0}}>
+                        <Tooltip title={copied ? "Copied!" : "Copy link"} arrow>
+                            <LinkRounded
+                                onClick={handleCopy}
+                                sx={{ cursor: 'pointer', color: 'text.secondary', m: "1.2rem 0 0.5rem" }}
+                                fontSize="small"
+                            />
+                        </Tooltip>
+                    </Typography>
                 </Link>
-                <Tooltip title={copied ? "Copied!" : "Copy link"} arrow>
-                    <LinkRounded
-                        onClick={handleCopy}
-                        sx={{ cursor: 'pointer', color: 'text.secondary', m: "1.2rem 0 0.5rem" }}
-                        fontSize="small"
-                    />
-                </Tooltip>
             </Box>
         );
     }
