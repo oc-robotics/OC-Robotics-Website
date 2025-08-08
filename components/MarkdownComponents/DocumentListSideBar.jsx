@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 function DocumentListSideBar({ documentList }) {
   return (
-    <Box sx={{ width: '20%', padding: 0, margin: 0, position: 'sticky', top: 64, height: 'calc(100vh - 64px)', overflowY: 'auto' }}>
+    <Box sx={{ padding: 0, margin: 0, position: 'sticky', top: 64, height: 'calc(100vh - 64px)', overflowY: 'auto' }}>
       <Typography variant="h6" gutterBottom>
         Document List
       </Typography>

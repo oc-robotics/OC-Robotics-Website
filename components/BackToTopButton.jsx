@@ -1,8 +1,22 @@
 'use client'
 import { Box, Tooltip } from '@mui/material';
 import { KeyboardArrowUp } from '@mui/icons-material';  
+import React, { useEffect, useState } from 'react';
 
 export default function BackToTopButton() {
+	const [show, setShow] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setShow(window.scrollY > 10);
+		};
+		window.addEventListener('scroll', handleScroll);
+		handleScroll(); // initial check
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	if (!show) return null;
+
 	return (
 		<Box sx={{
 			width: "45px",
@@ -26,5 +40,5 @@ export default function BackToTopButton() {
 				/>
 			</Tooltip>
 		</Box>
-	)
+	);
 }
