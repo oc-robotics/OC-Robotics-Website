@@ -1,11 +1,10 @@
 import { getEventsNextWeek } from '../lib/calendarData.js';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Paper, Chip, Button } from '@mui/material';
 import Link from 'next/link';
 
 export default async function UpcomingEventsWidget({ 
-  count = 5, 
-  showDescription = false,
-  className = "" 
+  count = 5,
+  showDescription
 }) {
   const apiKey = process.env.GOOGLE_API_KEY;
   const calendarId = process.env.GOOGLE_CALENDAR_ID || 'primary';
@@ -62,40 +61,101 @@ export default async function UpcomingEventsWidget({
     return location ? location : 'Online';
   };
 
+  const getEventType = (event) => {
+    let type;
+    let color;
+    if (event.title.toLowerCase().includes('meeting')) {
+      type = 'Meeting';
+      color = '#4caf50';
+    } else if (event.title.toLowerCase().includes('workshop')) {
+      type = 'Workshop';
+      color = '#f44336';
+    } else if (event.title.toLowerCase().includes('social')) {
+      type = 'Social';
+      color = '#ff9800';
+    } else if (event.title.toLowerCase().includes('networking')) {
+      type = 'Networking';
+      color = '#3f51b5';
+    } else if (event.title.toLowerCase().includes('competition')) {
+      type = 'Competition';
+      color = '#9c27b0';
+    } else {
+      type = 'Other';
+      color = '#1976d2';
+    }
+    return (
+      <Chip label={type} variant="outlined" sx={{
+        borderColor: color,
+        backgroundColor: `${color}10`,
+        color: color,
+        '&.MuiChip-outlined': {
+          borderColor: color,
+        },
+      }}/>
+    )
+  };
+
   return (
-    <Box sx={{
+    <Paper sx={{
       backgroundColor: 'white',
       borderRadius: '8px',
       boxShadow: 2,
-      p: 6
+      p: 3,
+      mx: 'auto'
     }}>
       <Typography variant='h3'>Upcoming Week Events</Typography>
 
-      <Box>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        mt: 3,
+        ml: 2
+      }}>
         {events.map((event) => (
-          <Box key={event.id}>
-            <Typography variant='h4' >{event.title}</Typography>
+          <Box key={event.id} sx={{
+            mb: 2,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
             <Box>
-              {formatDate(event.start)}, {formatTime(event.start)} - {formatTime(event.end)}
-              <Typography variant='body2'>
-                {formatLocation(event.location)}
-              </Typography>
+              <Typography variant='h4' >{event.title}</Typography>
+              <Box>
+                {formatDate(event.start)}, {formatTime(event.start)} - {formatTime(event.end)}
+                <Typography variant='body2'>
+                  {formatLocation(event.location)}
+                </Typography>
+              </Box>
+              
+              {showDescription && event.description && (
+                <Typography variant='body2' >
+                  {event.description}
+                </Typography>
+              )}
             </Box>
-            
-            {showDescription && event.description && (
-              <Typography variant='body2' >
-                {event.description}
-              </Typography>
-            )}
+            {getEventType(event)}
           </Box>
         ))}
       </Box>
       
       <Box className="mt-4">
-        <Link href="/events">
+        <Button component={Link} href="/events" variant="outlined" sx={{
+          my: 2,
+          p: 1,
+          width: 'auto',
+          height: '40px',
+          borderRadius: '20px',
+          color: 'primary.main',
+          transition: 'scale 0.3s',
+          '&:hover': {
+            cursor: 'pointer',
+            scale: 1.2,
+          },
+        }}>
           View all events →
-        </Link>
+        </Button>
       </Box>
-    </Box>
+    </Paper>
   );
 }

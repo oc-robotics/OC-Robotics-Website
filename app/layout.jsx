@@ -2,6 +2,7 @@ import React from 'react'
 import ClientThemeProvider from '@/components/ClientThemeProvider'
 import Footer from '@/components/Footer'
 import NavBar from '@/components/Navbar'
+import { Container } from '@mui/material'
 
 export const metadata = {
   title: 'OC Robotics',
@@ -22,9 +23,9 @@ export default function RootLayout({ children }) {
       <body style={{ margin: 0, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <ClientThemeProvider>
           <NavBar />
-          <main style={{ flex: 1 }}>
+          <Container>
             {children}
-          </main>
+          </Container>
           <Footer />
         </ClientThemeProvider>
       </body>

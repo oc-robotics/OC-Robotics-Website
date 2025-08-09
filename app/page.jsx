@@ -3,17 +3,13 @@ import UpcomingEventsWidget from '../components/UpcomingEventsWidget'
 
 function Home() {
   return(
-    <Container>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <h1>Welcome to OC Robotics</h1>
       <p>Your one-stop solution for all things robotics.</p>
-      
-      <Grid container spacing={4} sx={{ mt: 2 }}>
         {/* Upcoming Events Widget */}
-        <Grid item xs={12} md={4}>
-          <UpcomingEventsWidget count={5} showDescription={false} />
-        </Grid>
+        <UpcomingEventsWidget count={5} showDescription={true} />
         
-        {/* Calendar Embed */}
+        {/* Calendar Embed
         <Grid item xs={12} md={8}>
           <Box sx={{ width: '100%', height: 600 }}>
             <object
@@ -25,8 +21,7 @@ function Home() {
               style={{ border: 'none' }}
             />
           </Box>
-        </Grid>
-      </Grid>
+        </Grid> */}
     </Container>
   )
 }
