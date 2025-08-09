@@ -15,6 +15,11 @@ const withMDX = createMDX({
 const nextConfig = {
   experimental: { mdxRs: false },
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  }
 }
 
 export default withMDX(nextConfig)

@@ -32,9 +32,10 @@ function Navbar() {
   const menuItems = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Events', href: '/events' },
     { label: 'Projects', href: '/projects' },
     { label: 'Pages', href: '/pages' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   return (

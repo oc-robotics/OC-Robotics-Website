@@ -9,7 +9,7 @@ function DefaultDocument({ documentList }) {
     }}>
       <Box component="img" src='/oc-robotics-icon.png' alt="Documentation" sx={{
         mb: 2,
-        maxWidth: '40%',
+        maxWidth: '20%',
         height: 'auto'
       }} />
       <Typography variant="h2" gutterBottom>
