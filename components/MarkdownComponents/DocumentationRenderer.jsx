@@ -22,15 +22,15 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
     }
   
   return (
-    <Container disableGutters sx={{
+    <Container disableGutters maxWidth="false" sx={{
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
       m: 0,
       p: 0,
+      px: 2,
       mt: 3,
-      width: '100vw',
-      mx: 'auto'
+      width: '100%',
     }}>
       <DocumentListSideBar documentList={documentList} style={{ width: '40%' }} />
       <Box sx={{ flexGrow: 1, px: 2 }}>
