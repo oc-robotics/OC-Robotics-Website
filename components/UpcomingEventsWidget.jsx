@@ -1,9 +1,9 @@
-import { getUpcomingEvents } from '../lib/calendarData.js';
+import { getEventsNextWeek } from '../lib/calendarData.js';
 import { Box, Typography } from '@mui/material';
 import Link from 'next/link';
 
 export default async function UpcomingEventsWidget({ 
-  count = 3, 
+  count = 5, 
   showDescription = false,
   className = "" 
 }) {
@@ -15,11 +15,14 @@ export default async function UpcomingEventsWidget({
   
   if (shouldFetch && apiKey) {
     try {
-      events = await getUpcomingEvents({
+      events = await getEventsNextWeek({
         calendarId,
         apiKey,
-        count
+        maxResults: count * 2 // Get more events to account for filtering
       });
+      
+      // Limit to the requested count
+      events = events.slice(0, count);
     } catch (error) {
       console.error('Error fetching events for widget:', error);
     }
@@ -27,9 +30,9 @@ export default async function UpcomingEventsWidget({
 
   if (events.length === 0) {
     return (
-      <Box className={`bg-gray-100 rounded-lg p-4 ${className}`}>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">Upcoming Events</h3>
-        <p className="text-gray-600">No upcoming events.</p>
+      <Box>
+        <Typography variant='h3'>Upcoming Week Events</Typography>
+        <Typography>No upcoming events for the week.</Typography>
       </Box>
     );
   }
@@ -39,7 +42,6 @@ export default async function UpcomingEventsWidget({
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-      year: 'numeric'
     });
   };
 
@@ -52,6 +54,14 @@ export default async function UpcomingEventsWidget({
     });
   };
 
+  const formatLocation = (location) => {
+    const address = ", 2701 Fairview Rd, Costa Mesa, CA 92626, USA"
+    if (location && location.includes(address)) {
+      return location.replace(address, '').trim(); // Remove the address part
+    }
+    return location ? location : 'Online';
+  };
+
   return (
     <Box sx={{
       backgroundColor: 'white',
@@ -59,25 +69,21 @@ export default async function UpcomingEventsWidget({
       boxShadow: 2,
       p: 6
     }}>
-      <Typography variant='h3' className="text-lg font-semibold text-gray-900 mb-4">Upcoming Events</Typography>
+      <Typography variant='h3'>Upcoming Week Events</Typography>
 
-      <Box className="space-y-3">
+      <Box>
         {events.map((event) => (
-          <Box key={event.id} className="border-l-4 border-blue-500 pl-4">
-            <Typography variant='h4' className="font-medium text-gray-900">{event.title}</Typography>
-
-            <Box className="text-sm text-gray-600">
-              <Box>{formatDate(event.start)}</Box>
-              {!event.isAllDay && (
-                <Box>{formatTime(event.start)}</Box>
-              )}
-              {event.location && (
-                <Box className="text-xs text-gray-500">{event.location}</Box>
-              )}
+          <Box key={event.id}>
+            <Typography variant='h4' >{event.title}</Typography>
+            <Box>
+              {formatDate(event.start)}, {formatTime(event.start)} - {formatTime(event.end)}
+              <Typography variant='body2'>
+                {formatLocation(event.location)}
+              </Typography>
             </Box>
             
             {showDescription && event.description && (
-              <Typography variant='body2' className="text-sm text-gray-700 mt-1 line-clamp-2">
+              <Typography variant='body2' >
                 {event.description}
               </Typography>
             )}
@@ -86,10 +92,7 @@ export default async function UpcomingEventsWidget({
       </Box>
       
       <Box className="mt-4">
-        <Link 
-          href="/events" 
-          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-        >
+        <Link href="/events">
           View all events →
         </Link>
       </Box>
