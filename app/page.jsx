@@ -1,12 +1,12 @@
-import { Container, Box, Grid } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import UpcomingEventsWidget from '../components/UpcomingEventsWidget'
 import Calendar from '@/components/Calendar';
 
 function Home() {
   return(
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <h1>Welcome to OC Robotics</h1>
-      <p>Your one-stop solution for all things robotics.</p>
+      <Typography variant="h1">Welcome to OC Robotics</Typography>
+      <Typography variant="body1">Your one-stop solution for all things robotics.</Typography>
         <Calendar />
         <UpcomingEventsWidget count={5} showDescription={true} />
     </Container>

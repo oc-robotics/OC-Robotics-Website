@@ -33,7 +33,7 @@ function Navbar() {
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Events', href: '/events' },
-    { label: 'News', href: '/news' },
+    { label: 'Updates', href: '/updates' },
     { label: 'Projects', href: '/projects' },
     { label: 'Workshops', href: '/workshops' },
     { label: 'Pages', href: '/pages' },

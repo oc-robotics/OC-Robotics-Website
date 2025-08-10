@@ -18,7 +18,6 @@ export default async function Calendar() {
       console.error('Error fetching events for widget:', error);
     }
   }
-
-  console.log(events);
+  
   return <CalendarWithState events={events} />;
 }
