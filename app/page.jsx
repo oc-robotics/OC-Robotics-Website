@@ -7,9 +7,8 @@ function Home() {
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <h1>Welcome to OC Robotics</h1>
       <p>Your one-stop solution for all things robotics.</p>
-        {/* Upcoming Events Widget */}
-        <UpcomingEventsWidget count={5} showDescription={true} />
         <Calendar />
+        <UpcomingEventsWidget count={5} showDescription={true} />
     </Container>
   )
 }
