@@ -1,4 +1,6 @@
-import { getUpcomingEvents, getEventsInRange } from '../../lib/calendarData.js';
+import { getUpcomingEvents, getEventsInRange } from '@/lib/calendarData';
+import { Typography, Container, Alert, Grid, Box } from '@mui/material';
+import EventCard from './EventCard';
 
 // This function runs at build time in a static export
 export async function generateStaticParams() {
@@ -62,130 +64,71 @@ async function getEventsData() {
   }
 }
 
-function EventCard({ event }) {
-  const startDate = new Date(event.start);
-  const endDate = new Date(event.end);
-  
-  const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-  
-  const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    });
-  };
-
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-4 border-l-4 border-blue-500">
-      <h3 className="text-xl font-semibold text-gray-900 mb-2">
-        {event.title}
-      </h3>
-      
-      <div className="text-gray-600 mb-3">
-        <div className="flex items-center mb-1">
-          <span className="font-medium">Date:</span>
-          <span className="ml-2">{formatDate(startDate)}</span>
-        </div>
-        
-        {!event.isAllDay && (
-          <div className="flex items-center mb-1">
-            <span className="font-medium">Time:</span>
-            <span className="ml-2">
-              {formatTime(startDate)} - {formatTime(endDate)}
-            </span>
-          </div>
-        )}
-        
-        {event.location && (
-          <div className="flex items-center mb-1">
-            <span className="font-medium">Location:</span>
-            <span className="ml-2">{event.location}</span>
-          </div>
-        )}
-      </div>
-      
-      {event.description && (
-        <p className="text-gray-700 mb-3">
-          {event.description}
-        </p>
-      )}
-      
-      {event.link && (
-        <a
-          href={event.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-        >
-          View in Google Calendar
-        </a>
-      )}
-    </div>
-  );
-}
-
 export default async function EventsPage() {
   const { upcomingEvents, thisMonthEvents, hasUpcomingEvents, lastUpdated, error } = await getEventsData();
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Events</h1>
-      
-      {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-          <strong>Error loading events:</strong> {error}
-        </div>
-      )}
-      
-      {lastUpdated && (
-        <p className="text-gray-600 mb-6">
-          Last updated: {new Date(lastUpdated).toLocaleString()}
-        </p>
-      )}
-
-      {/* Upcoming/Recent Events Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-          {hasUpcomingEvents ? 'Upcoming Events' : 'Recent Events'}
-        </h2>
-        
-        {upcomingEvents.length === 0 ? (
-          <div className="bg-gray-100 rounded-lg p-6 text-center">
-            <p className="text-gray-600">No events found.</p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
+    <Container>
+      <Box sx={{
+        mb: 4
+      }}>
+        <Typography variant="h1">Events</Typography>
+        {error && (
+          <Alert severity="error">
+            <strong>Error loading events:</strong> {error}
+          </Alert>
         )}
-      </section>
-
-      {/* Recent Events Section */}
-      <section>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">All Recent Events</h2>
         
-        {thisMonthEvents.length === 0 ? (
-          <div className="bg-gray-100 rounded-lg p-6 text-center">
-            <p className="text-gray-600">No recent events found.</p>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {thisMonthEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
+        {lastUpdated && (
+          <Typography variant="body2" color="textSecondary">
+            Last updated: {new Date(lastUpdated).toLocaleString()}
+          </Typography>
         )}
-      </section>
-    </div>
+      </Box>
+      <Grid container spacing={4} column={16}>
+        <Grid size={6}>
+          <Typography variant="h2">
+            {hasUpcomingEvents ? 'Upcoming Events' : 'Recent Events'}
+          </Typography>
+
+          {upcomingEvents.length === 0 ? (
+            <Box>
+              <Typography variant='body1'>No events found.</Typography>
+            </Box>
+          ) : (
+            <Box sx={{
+              mt: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2
+            }}>
+              {upcomingEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </Box>
+          )}
+        </Grid>
+        <Grid size={6}>
+          <Typography variant="h2">All Recent Events</Typography>
+
+          {thisMonthEvents.length === 0 ? (
+            <Box>
+              <Typography variant="body1">No recent events found.</Typography>
+            </Box>
+          ) : (
+            <Box sx={{
+              mt: 2, 
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2
+            }}>
+              {thisMonthEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </Box>
+          )}
+        </Grid>
+      </Grid>
+    </Container>
   );
 }

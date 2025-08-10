@@ -79,9 +79,12 @@ export default async function UpcomingEventsWidget({
     } else if (event.title.toLowerCase().includes('competition')) {
       type = 'Competition';
       color = '#9c27b0';
+    } else if (event.title.toLowerCase().includes('drop-in')) {
+      type = 'Optional Drop-in';
+      color = '#1976d2';
     } else {
       type = 'Other';
-      color = '#1976d2';
+      color = '#9e9e9e';
     }
     return (
       <Chip label={type} variant="outlined" sx={{
