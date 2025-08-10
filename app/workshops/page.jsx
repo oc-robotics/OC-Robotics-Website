@@ -68,7 +68,7 @@ export default function Workshops() {
       date: '2025-08-01',
       type: 'software',
       slidesUrl: 'https://www.canva.com/design/DAGu14wMSPg/VBsftQX2Fss2oFRLR9kSTw/view?embed'
-    }
+    },
   ]
   const mechanicalWorkshops = workshops.filter(workshop => workshop.type === 'mechanical')
   const electricalWorkshops = workshops.filter(workshop => workshop.type === 'electrical')
