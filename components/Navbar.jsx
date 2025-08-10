@@ -33,7 +33,9 @@ function Navbar() {
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Events', href: '/events' },
+    { label: 'News', href: '/news' },
     { label: 'Projects', href: '/projects' },
+    { label: 'Workshops', href: '/workshops' },
     { label: 'Pages', href: '/pages' },
     { label: 'Contact', href: '/contact' },
   ];
