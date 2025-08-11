@@ -1,6 +1,6 @@
 'use client'
 import { Chip, Box, Typography, Divider, Button, Card, CardContent, Slide, Snackbar, Alert, Tooltip } from "@mui/material";
-import { CalendarMonth, Map, Notifications, Close } from "@mui/icons-material";
+import { CalendarMonth, Map, Notifications, Close, School } from "@mui/icons-material";
 import Link from 'next/link';
 import { useState } from "react";
 
@@ -58,6 +58,38 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
     setTimeout(() => setCopiedEvent(false), 1500);
   };
 
+  let type;
+  let color;
+  if (event.title.toLowerCase().includes('meeting')) {
+    type = 'Meeting';
+    color = '#4caf50';
+  } else if (event.title.toLowerCase().includes('workshop')) {
+    type = 'Workshop';
+    color = '#f44336';
+  } else if (event.title.toLowerCase().includes('social')) {
+    type = 'Social';
+    color = '#ff9800';
+  } else if (event.title.toLowerCase().includes('networking')) {
+    type = 'Networking';
+    color = '#3f51b5';
+  } else if (event.title.toLowerCase().includes('competition')) {
+    type = 'Competition';
+    color = '#9c27b0';
+  } else if (event.title.toLowerCase().includes('drop-in')) {
+    type = 'Optional Drop-in';
+    color = '#1976d2';
+  } else {
+    type = 'Other';
+    color = '#9e9e9e';
+  }
+
+  function extractUrlFromAnchor(anchorString) {
+    const match = anchorString.match(/href\s*=\s*["']([^"']*)["']/i);
+    return match ? match[1] : null;
+  }
+
+  const workshopHaveLink = type === 'Workshop' && extractUrlFromAnchor(event.description);
+
   return (
     <Box>
       <Chip
@@ -66,9 +98,9 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
         variant="outlined"
         onClick={handleChipClick}
         sx={{
-          borderColor: 'primary.main',
-          backgroundColor: '',
-          color: 'primary.main',
+          borderColor: color,
+          backgroundColor: `${color}33`,
+          color: color,
           cursor: 'pointer',
           margin: '4px 0',
           width: '100%',
@@ -143,10 +175,13 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                 WebkitLineClamp: 5,
                 textOverflow: 'ellipsis'
               }}>
-                {event.description}
+                {workshopHaveLink ? (
+                  <>Slides are available</>
+                ) : (
+                  event.description
+                )}
               </Typography>
             </Box>
-            
             <Box sx={{ mt: 2, display: 'flex', gap: 1, flexDirection: 'row' }}>
               <Tooltip title="View on Google Calendar" arrow placement="bottom">
                 <Button 
@@ -175,7 +210,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                     variant="outlined"
                     size="small"
                     component={Link}
-                    href={getLocationSearchUrl(eventLocation)}
+                    href={eventLocation}
                     target="_blank"
                     sx={{
                       color: 'primary.main',
@@ -189,6 +224,29 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                     }}
                   >
                     <Map sx={{ m: 1}} />
+                  </Button>
+                </Tooltip>
+              )}
+              {workshopHaveLink && (
+                <Tooltip title="View Workshop Details" arrow placement="bottom">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    component={Link}
+                    href={extractUrlFromAnchor(event.description)}
+                    target="_blank"
+                    sx={{
+                      color: 'primary.main',
+                      borderColor: 'primary.main',
+                      height: "40px",
+                      borderRadius: "20px",
+                      '&:hover': {
+                        backgroundColor: 'primary.main',
+                        color: 'white',
+                      }
+                    }}
+                  >
+                    <School sx={{ m: 1}} />
                   </Button>
                 </Tooltip>
               )}
