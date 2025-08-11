@@ -14,7 +14,7 @@ To add Canva slides to the workshops page, follow these steps:
   - Example: `https://www.canva.com/design/your-design-id/view?embed`
 
 ## 3. Add to the List of Workshops
-- Head to the `page.jsx` in the `workshops` folder
+- Head to the `slides.jsx` in the `workshops` folder
 - In the workshops variable: 
   - Copy the following to the end of the list: 
   ```jsx
