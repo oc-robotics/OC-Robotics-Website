@@ -19,6 +19,5 @@ export default async function Calendar() {
     }
   }
 
-  console.log(events);
   return <CalendarWithState events={events} />;
 }
