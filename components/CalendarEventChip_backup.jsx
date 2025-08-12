@@ -1,5 +1,5 @@
 'use client'
-import { Chip, Box, Typography, Divider, Button, Card, CardContent, Slide, Snackbar, Alert, Tooltip } from "@mui/material";
+import { Chip, Box, Typography, Divider, Button, Card, CardContent, Slide, Snackbar, Alert, Tooltip, TextField, Select, FormControl, InputLabel, MenuItem } from "@mui/material";
 import { CalendarMonth, Map, Notifications, Close, School } from "@mui/icons-material";
 import Link from 'next/link';
 import { useState } from "react";
@@ -11,6 +11,13 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
 
   const handleChipClick = () => {
     onPopupToggle(isPopupOpen ? null : id, event);
+  };
+
+  // Create Google Maps URL for the location
+  const getLocationSearchUrl = (location) => {
+    if (!location) return '';
+    const searchQuery = encodeURIComponent(location);
+    return `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
   };
 
   const formatDate = (dateString) => {
@@ -89,17 +96,80 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
 
     const designId = canvaMatch[1];
     const embedUrl = url + '?embed';
-    
-    // Check if workshop exists in our data
-    const existingWorkshop = workshops.find(workshop => workshop.slidesUrl === embedUrl);
-    if (existingWorkshop) {
-      return `/workshops/${existingWorkshop.id}`;
-    }
-    
-    return embedUrl;
+    return `/workshops/#${embedUrl}`;
   }
 
   const workshopHaveLink = type === 'Workshop' && extractUrlFromAnchor(event.description);
+
+  // Check if this is a new Canva URL that needs to be added
+  const isNewCanvaWorkshop = 
+    workshopHaveLink && 
+    typeof workshopHaveLink === 'string' && 
+    workshopHaveLink.includes('canva.com') && 
+    workshopHaveLink.includes('?embed') && 
+    !workshops.find(workshop => workshop.slidesUrl === workshopHaveLink);
+
+  const showAlert = (type, message) => {
+    return (
+      <Snackbar
+        open={true}
+        autoHideDuration={6000}
+        onClose={() => {}}
+      >
+        <Alert onClose={() => {}} severity={type} variant="outlined" anchor={{vertical: 'bottom', horizontal: 'left'}}>
+          {message}
+        </Alert>
+      </Snackbar>
+    )
+  };
+
+  const handleNewWorkshopDetected = () => {
+    if (isNewCanvaWorkshop) {
+      setAddWorkshop({...addWorkshop, open: true, slideUrl: workshopHaveLink});
+    }
+  };
+
+  const handleAddWorkshop = () => {
+    const embedUrl = addWorkshop.slideUrl;
+    if (!embedUrl || !addWorkshop.title || !addWorkshop.description) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    // Check if workshop already exists
+    const existingWorkshop = workshops.find(workshop => workshop.slidesUrl === embedUrl);
+    
+    if (!existingWorkshop) {
+      const newWorkshop = {
+        id: Math.max(...workshops.map(w => w.id), 0) + 1,
+        title: addWorkshop.title,
+        description: addWorkshop.description,
+        date: addWorkshop.date || new Date().toISOString().split('T')[0],
+        type: addWorkshop.type || 'software',
+        slidesUrl: embedUrl
+      };
+      
+      const updatedWorkshops = [...workshops, newWorkshop];
+      setWorkshops(updatedWorkshops);
+      
+      // Save to localStorage
+      localStorage.setItem('oc-workshops', JSON.stringify(updatedWorkshops));
+      
+      alert('Workshop added successfully!');
+    } else {
+      alert('Workshop already exists!');
+    }
+
+    // Reset form and close
+    setAddWorkshop({
+      open: false,
+      title: '',
+      description: '',
+      date: '',
+      slideUrl: '',
+      type: 'software'
+    });
+  };
 
   return (
     <Box>
@@ -120,6 +190,91 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
           alignItems: 'center'
         }}
       />
+      <Slide in={addWorkshop.open} direction="up" mountOnEnter unmountOnExit>
+        <Card sx={{ 
+          position: 'fixed', 
+          zIndex: 999, 
+          maxWidth: 500,
+          right: 12,
+          bottom: 280,
+          mt: 1,
+        }}>
+          <CardContent>
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mb: 2
+            }}>
+              <Typography variant="h6">
+                Add Workshop Slides
+              </Typography>
+              <Tooltip title="Close" arrow placement="top">
+                <Close onClick={() => setAddWorkshop({...addWorkshop, open: false})} sx={{
+                  cursor: 'pointer',
+                  borderRadius: '50%',
+                  transition: 'background-color 0.3s, transform 0.3s',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    transform: 'scale(1.1)'
+                  }
+                }}/>
+              </Tooltip>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <TextField
+                required
+                fullWidth
+                label="Slide Title"
+                variant="outlined"
+                value={addWorkshop.title}
+                onChange={(e) => setAddWorkshop({ ...addWorkshop, title: e.target.value })}
+              />
+              <TextField
+                required
+                fullWidth
+                multiline
+                rows={3}
+                label="Slide Description"
+                variant="outlined"
+                value={addWorkshop.description}
+                onChange={(e) => setAddWorkshop({ ...addWorkshop, description: e.target.value })}
+              />
+              <FormControl fullWidth>
+                <InputLabel id="workshop-type-label">Workshop Type</InputLabel>
+                <Select
+                  required
+                  labelId="workshop-type-label"
+                  label="Workshop Type"
+                  variant="outlined"
+                  value={addWorkshop.type || 'software'}
+                  onChange={(e) => setAddWorkshop({ ...addWorkshop, type: e.target.value })}
+                >
+                  <MenuItem value="software">Software</MenuItem>
+                  <MenuItem value="mechanical">Mechanical</MenuItem>
+                  <MenuItem value="electrical">Electrical</MenuItem>
+                  <MenuItem value="business">Business</MenuItem>
+                </Select>
+              </FormControl>
+              <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
+                <Button
+                  variant="outlined"
+                  onClick={() => setAddWorkshop({...addWorkshop, open: false})}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleAddWorkshop}
+                >
+                  Add Workshop
+                </Button>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Slide>
       <Slide in={isPopupOpen} direction="up" mountOnEnter unmountOnExit>
         <Card sx={{ 
           position: 'fixed', 
@@ -244,7 +399,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                     variant="outlined"
                     size="small"
                     component={Link}
-                    href={workshopHaveLink}
+                    href={extractUrlFromAnchor(event.description)}
                     target="_blank"
                     sx={{
                       color: 'primary.main',
@@ -253,6 +408,27 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                       borderRadius: "20px",
                       '&:hover': {
                         backgroundColor: 'primary.main',
+                        color: 'white',
+                      }
+                    }}
+                  >
+                    <School sx={{ m: 1}} />
+                  </Button>
+                </Tooltip>
+              )}
+              {isNewCanvaWorkshop && (
+                <Tooltip title="Add Workshop Details" arrow placement="bottom">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={handleNewWorkshopDetected}
+                    sx={{
+                      color: 'secondary.main',
+                      borderColor: 'secondary.main',
+                      height: "40px",
+                      borderRadius: "20px",
+                      '&:hover': {
+                        backgroundColor: 'secondary.main',
                         color: 'white',
                       }
                     }}

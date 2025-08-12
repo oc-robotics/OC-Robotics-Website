@@ -2,10 +2,9 @@
 import React from 'react'
 import { Box, Container, Grid, Select, Typography, MenuItem, Grow, FormControl, InputLabel } from '@mui/material'
 import WorkshopCards from './workshopCards'
-import { workshops } from './slides'
+import { workshops } from '@/lib/workshopsData'
 
 export default function Workshops() {
-  
   const mechanicalWorkshops = workshops.filter(workshop => workshop.type === 'mechanical')
   const electricalWorkshops = workshops.filter(workshop => workshop.type === 'electrical')
   const softwareWorkshops = workshops.filter(workshop => workshop.type === 'software')
@@ -27,6 +26,7 @@ export default function Workshops() {
     }
   }
 
+  console.log(workshops)
   const currentData = getCurrentWorkshopData()
 
   return (
@@ -53,7 +53,7 @@ export default function Workshops() {
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map(workshop => (
               <Grid item xs={12} sm={6} md={4} key={workshop.id} size={6}>
-                <WorkshopCards workshop={workshop} />
+                <WorkshopCards id={workshop.id} workshop={workshop} />
               </Grid>
             ))}
           </Grid>
