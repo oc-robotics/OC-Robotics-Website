@@ -9,17 +9,11 @@ export default function Workshops() {
   const electricalWorkshops = workshops.filter(workshop => workshop.type === 'electrical')
   const softwareWorkshops = workshops.filter(workshop => workshop.type === 'software')
   const businessWorkshops = workshops.filter(workshop => workshop.type === 'business')
+  const all = workshops
 
-  const [selectedWorkshop, setSelectedWorkshop] = React.useState("software")
+  const [selectedWorkshop, setSelectedWorkshop] = React.useState("all")
 
   useEffect(() => {
-    // Function to find which category a workshop belongs to
-    const findWorkshopCategory = (workshopId) => {
-      const workshop = workshops.find(w => w.id.toString() === workshopId);
-      if (!workshop) return null;
-      return workshop.type;
-    };
-
     // Function to handle scrolling to element based on URL hash
     const scrollToHashElement = () => {
       const hash = window.location.hash;
@@ -29,11 +23,8 @@ export default function Workshops() {
         // Check if it's a workshop ID (format: workshop-123)
         if (elementId.startsWith('workshop-')) {
           const workshopId = elementId.replace('workshop-', '');
-          const workshopCategory = findWorkshopCategory(workshopId);
-          
-          if (workshopCategory) {
-            // Switch to the correct category first
-            setSelectedWorkshop(workshopCategory);
+          const workshop = workshops.find(w => w.id.toString() === workshopId);
+          if (workshop) {
             
             // Wait for the category to render, then scroll
             setTimeout(() => {
@@ -46,18 +37,6 @@ export default function Workshops() {
                 });
               }
             }, 300); // Give time for the category switch and re-render
-          }
-        } else {
-          // Handle other hash elements normally
-          const element = document.getElementById(elementId);
-          if (element) {
-            setTimeout(() => {
-              element.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start',
-                inline: 'nearest'
-              });
-            }, 100);
           }
         }
       }
@@ -81,6 +60,8 @@ export default function Workshops() {
   // Function to get the current workshops and title
   const getCurrentWorkshopData = () => {
     switch(selectedWorkshop) {
+      case 'software':
+        return { workshops: softwareWorkshops }
       case "mechanical":
         return { workshops: mechanicalWorkshops }
       case "electrical":
@@ -88,7 +69,7 @@ export default function Workshops() {
       case "business":
         return { workshops: businessWorkshops }
       default:
-        return { workshops: softwareWorkshops }
+        return { workshops: all }
     }
   }
 
@@ -106,6 +87,7 @@ export default function Workshops() {
           value={selectedWorkshop}
           onChange={e => setSelectedWorkshop(e.target.value)}
         >
+          <MenuItem value="all">All Workshops</MenuItem>
           <MenuItem value="software">Software Workshops</MenuItem>
           <MenuItem value="mechanical">Mechanical Workshops</MenuItem>
           <MenuItem value="electrical">Electrical Workshops</MenuItem>
