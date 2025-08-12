@@ -3,16 +3,6 @@ import React, { useState } from "react";
 import { Box, Typography, Tooltip } from "@mui/material";
 import Link from "next/link";
 
-// Heading link component for anchor navigation and smooth scroll
-function scrollToAnchor(e, id) {
-    e.preventDefault();
-    window.location.hash = id;
-    const el = document.getElementById(id);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
 export const h1Link = ({ id, ...rest }) => {
     const [copied, setCopied] = useState(false);
     if (id) {
