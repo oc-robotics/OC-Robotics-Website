@@ -16,7 +16,7 @@ export default async function Updates() {
           width: '100%',
         }}>
         {blogs.map((blog, index) => (
-          <UpdateTag key={index} blog={blog} />
+            <UpdateTag key={index} blog={blog} />
         ))}
       </Stack>
     </Container>
