@@ -6,13 +6,10 @@
   "scripts": {
     "dev": "next dev",
     "clean": "Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue",
-    "prebuild": "node lib/buildWorkshops.js && node lib/buildBlogs.js",
     "build": "next build",
     "build:clean": "npm run clean && npm run build",
     "start": "next start",
-    "lint": "next lint",
-    "generate-workshops": "node lib/buildWorkshops.js",
-    "generate-blogs": "node lib/buildBlogs.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
