@@ -1,6 +1,6 @@
-import { IconButton, Slide, Snackbar, Alert, Button, Box } from '@mui/material';
+import { Slide, Snackbar, Alert, Button, Box } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import {Close, CheckRounded, ContentCopyRounded } from '@mui/icons-material';
+import { CheckRounded, ContentCopyRounded } from '@mui/icons-material';
 
 function SlideTransition(props) {
   return <Slide {...props} direction="up" />;

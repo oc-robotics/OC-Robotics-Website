@@ -1,6 +1,5 @@
 import React from 'react'
-import { Typography, Container, Button, Box, Grid, CardContent, Card } from '@mui/material'
-import Link from 'next/link'
+import { Typography, Container, Grid, CardContent, Card } from '@mui/material'
 
 export default function About() {
   return (

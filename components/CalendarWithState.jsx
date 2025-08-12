@@ -5,11 +5,9 @@ import CalendarEventChip from "./CalendarEventChip";
 
 export default function CalendarWithState({ events }) {
   const [activePopup, setActivePopup] = useState(null);
-  const [activeEvent, setActiveEvent] = useState(null);
 
   const handlePopupToggle = (chipId, event) => {
     setActivePopup(chipId);
-    setActiveEvent(event);
   };
 
   // Handle click outside to close popup
@@ -17,7 +15,6 @@ export default function CalendarWithState({ events }) {
     const handleClickOutside = (event) => {
       if (activePopup && !event.target.closest('.MuiChip-root') && !event.target.closest('.MuiCard-root')) {
         setActivePopup(null);
-        setActiveEvent(null);
       }
     };
 
