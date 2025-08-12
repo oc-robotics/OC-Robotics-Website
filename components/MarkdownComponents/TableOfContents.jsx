@@ -5,11 +5,13 @@ import Link from 'next/link';
 export default function Sidebar({ toc }) {
   return (
     <List sx={{
-      width: '20%',
       borderRadius: 1,
-      maxHeight: 'calc(100vh - 64px)',
+      maxHeight: 'calc(90vh - 64px)',
       position: 'sticky',
-      top: 64,
+      height: 'fit-content',
+      p: 2,
+      boxShadow: 2,
+      top: 100,
       px: 1
     }}>
       <ListItem sx={{ px: 0, py: '4px' }}>
