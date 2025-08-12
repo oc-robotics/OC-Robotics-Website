@@ -12,8 +12,7 @@ export default async function Updates() {
         sx={{
           mt: 2,
           justifyContent: 'center',
-          alignItems: 'stretch',
-          width: '100%',
+          alignItems: 'center',
         }}>
         {blogs.map((blog, index) => (
             <UpdateTag key={index} blog={blog} />
