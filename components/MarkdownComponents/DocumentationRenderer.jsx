@@ -18,7 +18,6 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
       pre: (props) => <CodeBlock {...props} />,
       h1: h1Link,
       h2: h2Link,
-      h3: h3Link,
     }
   
   return (
