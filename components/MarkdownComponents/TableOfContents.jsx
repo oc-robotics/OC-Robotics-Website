@@ -2,7 +2,6 @@ import React from 'react';
 import { List, ListItem, Typography } from '@mui/material';
 import Link from 'next/link';
 
-
 export default function Sidebar({ toc }) {
   return (
     <List sx={{

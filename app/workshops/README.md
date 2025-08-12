@@ -14,19 +14,8 @@ To add Canva slides to the workshops page, follow these steps:
   - Example: `https://www.canva.com/design/your-design-id/view?embed`
 
 ## 3. Add to the List of Workshops
-- Head to the `slides.jsx` in the `workshops` folder
-- In the workshops variable: 
-  - Copy the following to the end of the list: 
-  ```jsx
-  {
-    id: 7, // add 1 to the previous ID number
-    title: 'title of workshop',
-    description: 'Short description of the workshop',
-    date: 'date created the slide',
-    type: 'which subteam\'s workshop',
-    slidesUrl: 'copied url'
-  },
-  ```
+- Open this [link](https://forms.gle/UqnrRYFv22d9J6yA8), follow the directions and fill it out
+  - Make sure you are logged in as the ocr email (limited to ocr email account only)
 
 ## 4. Verify
 - Open the workshops page in your browser.

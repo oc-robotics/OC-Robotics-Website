@@ -8,18 +8,20 @@ export default function WorkshopCards({ workshop }) {
   };
 
   return (
-    <Card sx={{
-      boxShadow: 3,
-      borderRadius: 2,
-      overflow: 'hidden',
-      transition: 'transform 0.6s box-shadow 0.3s',
-      cursor: 'pointer',
-      '&:hover': {
-        boxShadow: 6,
-        transform: 'translateY(-5px)',
-      },
-    }}
-    onClick={handleCardClick}
+    <Card 
+      id={`workshop-${workshop.id}`} // Add unique ID for scrolling
+      sx={{
+        boxShadow: 3,
+        borderRadius: 2,
+        overflow: 'hidden',
+        transition: 'transform 0.6s box-shadow 0.3s',
+        cursor: 'pointer',
+        '&:hover': {
+          boxShadow: 6,
+          transform: 'translateY(-5px)',
+        },
+      }}
+      onClick={handleCardClick}
     >
       <CardContent>
         <CardHeader

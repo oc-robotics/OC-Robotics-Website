@@ -3,7 +3,7 @@ import { Chip, Box, Typography, Divider, Button, Card, CardContent, Slide, Snack
 import { CalendarMonth, Map, Notifications, Close, School } from "@mui/icons-material";
 import Link from 'next/link';
 import { useState } from "react";
-import { workshops } from '@/app/workshops/slides';
+import { workshops } from '@/lib/workshopsData.js';
 
 const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLocation, activePopup, onPopupToggle }) => {
   const [copiedEvent, setCopiedEvent] = useState(false);
@@ -93,7 +93,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
     // Check if workshop exists in our data
     const existingWorkshop = workshops.find(workshop => workshop.slidesUrl === embedUrl);
     if (existingWorkshop) {
-      return `/workshops/${existingWorkshop.id}`;
+      return `/workshops/#workshop-${existingWorkshop.id}`;
     }
     
     return embedUrl;
@@ -124,7 +124,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
         <Card sx={{ 
           position: 'fixed', 
           zIndex: 1000, 
-          maxWidth: 600,
+          maxWidth: 300,
           maxHeight: '40vh',
           right: 12,
           bottom: 36,
