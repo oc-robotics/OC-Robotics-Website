@@ -7,6 +7,8 @@ export default function WorkshopCards({ workshop }) {
     window.open(workshop.slidesUrl, '_blank', 'fullscreen=yes,scrollbars=yes,resizable=yes');
   };
 
+  console.log('Workshop Slides URL:', workshop.slidesUrl);
+
   return (
     <Card 
       id={`workshop-${workshop.id}`} // Add unique ID for scrolling
@@ -64,7 +66,7 @@ export default function WorkshopCards({ workshop }) {
             component="iframe" 
             title={workshop.title}
             loading="lazy"
-            src={workshop.slidesUrl} 
+            src={`${workshop.slidesUrl}?embed`}
             allowFullScreen
             sx={{
               position: "absolute",

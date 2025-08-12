@@ -1,8 +1,20 @@
 import { Container, Typography, Stack } from "@mui/material"
 import UpdateTag from "./updateTag"
-import { blogs } from "@/lib/blogsData.js"
+import { getBlogsFromGoogleSheets } from "@/lib/googleSheetsApi.js"
 
 export default async function Updates() {
+  const apiKey = process.env.GOOGLE_API_KEY;
+
+  let blogsFromSheets = [];
+  
+  if (apiKey) {
+    try {
+      blogsFromSheets = await getBlogsFromGoogleSheets();
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    }
+  }
+
   return (
     <Container>
       <Typography variant="h1">Weekly Updates</Typography>
@@ -14,7 +26,7 @@ export default async function Updates() {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        {blogs.map((blog, index) => (
+        {blogsFromSheets.map((blog, index) => (
             <UpdateTag key={index} blog={blog} />
         ))}
       </Stack>

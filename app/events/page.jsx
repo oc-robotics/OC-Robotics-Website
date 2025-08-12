@@ -10,10 +10,9 @@ export async function generateStaticParams() {
 async function getEventsData() {
   const apiKey = process.env.GOOGLE_API_KEY;
   const calendarId = process.env.GOOGLE_CALENDAR_ID || 'primary';
-  const shouldFetch = process.env.FETCH_CALENDAR_AT_BUILD === 'true';
 
-  if (!shouldFetch || !apiKey) {
-    console.log('Calendar fetch disabled or no API key provided');
+  if (!apiKey) {
+    console.log('No API key provided');
     return {
       upcomingEvents: [],
       thisMonthEvents: [],
