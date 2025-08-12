@@ -58,7 +58,7 @@ export const workshops = [
     "slidesUrl": "https://www.canva.com/design/DAGs3BaughQ/tW7fv3XFfK1lMiHuQ7z-AA/view?embed"
   },
   {
-    "id": 0.8257465245783853,
+    "id": 0.79787006857575,
     "title": "Git Version Control",
     "description": "Learn the basics of Git and version control for your projects.",
     "date": "2025-05-16",
