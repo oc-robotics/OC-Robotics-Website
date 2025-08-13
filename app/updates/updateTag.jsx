@@ -1,3 +1,4 @@
+'use client'
 import { Box, Typography, Chip } from "@mui/material";
 
 export default function UpdateTag({ blog }) {
@@ -10,7 +11,7 @@ export default function UpdateTag({ blog }) {
       case 'Business':
         return '#29eb66';
       case 'Electrical':
-        return '#ffdd00';
+        return '#ffd700';
       case 'Club':
         return '#f57c00';
       default:
@@ -20,57 +21,59 @@ export default function UpdateTag({ blog }) {
 
   return (
     <Box sx={{
-      width: '80%',
+      width: '100%',
+      minHeight: '250px',
       p: 3,
+      pr: 0,
       mx: 'auto',
       borderInlineStart: '3px solid',
       borderColor: 'primary.main',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
       borderRadius: 2,
       my: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      gap: 2
     }}>
       <Box sx={{
-        flexGrow: 1,
         display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
       }}>
-        <Box sx={{flexGrow: 1, maxWidth: '50%'}}>
-          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{blog.title}</Typography>
-          <Box sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 5,
-            alignItems: 'center',
-          }}>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>By {blog.author}</Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>{blog.date}</Typography>
-          </Box>
-        </Box>
-        <Box sx={{
-          flexGrow: 1,
+        <Box sx={{ 
+          width: '30%',
+          height: '250px',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'flex-end',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          pr: 2
         }}>
-          {blog.tags.map((tag, index) => (
-            <Chip 
-              key={index} 
-              label={tag} 
-              variant="outlined" 
-              sx={{ 
-                m: 0.5,
-                borderColor: getChipColor(tag),
-                color: getChipColor(tag),
-                backgroundColor: `${getChipColor(tag)}15`
-              }} />
-          ))}
+          <Box sx={{mb: 1}}>
+            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{blog.title}</Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>Updated By: {blog.author}</Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>{blog.date}</Typography>
+          </Box>
+          <Box sx={{ mt: 1 }}>
+            {blog.tags.map((tag, index) => (
+              <Chip
+                key={index}
+                label={tag}
+                variant="outlined"
+                sx={{
+                  m: 0.5,
+                  borderColor: getChipColor(tag),
+                  color: getChipColor(tag),
+                  backgroundColor: `${getChipColor(tag)}15`
+                }} />
+            ))}
+          </Box>
         </Box>
-      </Box>
-      <Box sx={{ mt: 1 }}>
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Description: </Typography>
-        <Typography variant="body1" sx={{ whiteSpace: 'pre-line' }}>{blog.description}</Typography>
+        <Box sx={{ width: '70%', pr: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Description: </Typography>
+          <Typography variant="body1" sx={{ whiteSpace: 'pre-line' }}>{blog.description}</Typography>
+        </Box>
       </Box>
     </Box>
   );

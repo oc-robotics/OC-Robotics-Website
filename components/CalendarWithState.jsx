@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import CalendarEventChip from "./CalendarEventChip";
 
-export default function CalendarWithState({ events }) {
+export default function CalendarWithState({ events, workshops }) {
   const [activePopup, setActivePopup] = useState(null);
 
   const handlePopupToggle = (chipId, event) => {
@@ -156,6 +156,7 @@ export default function CalendarWithState({ events }) {
                       eventLocation={event.location}
                       activePopup={activePopup}
                       onPopupToggle={handlePopupToggle}
+                      workshops={workshops}
                     />
                   );
                 }
