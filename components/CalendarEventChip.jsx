@@ -3,9 +3,8 @@ import { Chip, Box, Typography, Divider, Button, Card, CardContent, Slide, Snack
 import { CalendarMonth, Map, Notifications, Close, School } from "@mui/icons-material";
 import Link from 'next/link';
 import { useState } from "react";
-import { workshops } from '@/lib/workshopsData.js';
 
-const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLocation, activePopup, onPopupToggle }) => {
+const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLocation, activePopup, onPopupToggle, workshops }) => {
   const [copiedEvent, setCopiedEvent] = useState(false);
   const isPopupOpen = activePopup === id;
 
