@@ -6,7 +6,7 @@ import CodeBlock from '@/components/MarkdownComponents/CodeBlock.jsx'
 import { h1Link, h2Link } from '@/components/MarkdownComponents/HeaderLinks.jsx'
 import React from 'react'
 import '@/styles/codeBlock.css'
-import styles from '@/styles/markdown.module.css'
+import '@/styles/markdown.css'
 import Sidebar from './TableOfContents'
 import DocumentListSideBar from './DocumentListSideBar'
 import BackToTopButton from '../BackToTopButton'
@@ -33,7 +33,7 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
       <DocumentListSideBar documentList={documentList} style={{ width: '40%' }} />
       <Box sx={{ flexGrow: 1, px: 2 }}>
         
-        <Paper className={styles["markdown-body"]} sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
+        <Paper className="markdown-body" sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
           <Typography variant="h4" gutterBottom>
           {frontmatter.title}
         </Typography>

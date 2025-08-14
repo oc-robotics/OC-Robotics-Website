@@ -1,29 +1,44 @@
 'use client'
 import {Card, CardContent, CardHeader, Typography, Avatar, Box, CardMedia } from '@mui/material';
 import { Work, Construction, FlashOn, Laptop } from '@mui/icons-material';
+import { useState } from 'react';
 
-export default function WorkshopCards({ workshop }) {
+export default function WorkshopCards({ workshop, targetId }) {
+  const isTargeted = targetId && targetId === workshop.id.toString();
+  const [remind, setRemind] = useState(isTargeted);
+  const animation = remind ? 'bouncing 0.6s infinite' : 'none';
   const handleCardClick = () => {
     window.open(workshop.slidesUrl, '_blank', 'fullscreen=yes,scrollbars=yes,resizable=yes');
   };
-
-  console.log('Workshop Slides URL:', workshop.slidesUrl);
 
   return (
     <Card 
       id={`workshop-${workshop.id}`} // Add unique ID for scrolling
       sx={{
+        "@keyframes bouncing": {
+          "0%": {
+            transform: "translateY(0)"
+          },
+          "50%": {
+            transform: "translateY(-5px)"
+          },
+          "100%": {
+            transform: "translateY(0)"
+          }
+        },
         boxShadow: 3,
         borderRadius: 2,
         overflow: 'hidden',
         transition: 'transform 0.6s box-shadow 0.3s',
         cursor: 'pointer',
+        animation: animation,
         '&:hover': {
           boxShadow: 6,
           transform: 'translateY(-5px)',
         },
       }}
       onClick={handleCardClick}
+      onMouseOver={() => setRemind(false)}
     >
       <CardContent>
         <CardHeader
