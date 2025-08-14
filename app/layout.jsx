@@ -3,6 +3,7 @@ import ClientThemeProvider from '@/components/ClientThemeProvider'
 import Footer from '@/components/Footer'
 import NavBar from '@/components/Navbar'
 import { Container } from '@mui/material'
+import BackToTopButton from '@/components/BackToTopButton'
 
 export const metadata = {
   title: 'OC Robotics',
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
             {children}
           </Container>
           <Footer />
+          <BackToTopButton />
         </ClientThemeProvider>
       </body>
     </html>
