@@ -1,5 +1,5 @@
 'use client'
-import { Container, Typography, Paper, Stack, Button, Box, Collapse, Fade } from "@mui/material";
+import { Container, Typography, Paper, Stack, Button, Box, Collapse } from "@mui/material";
 import UpdateTag from "./updateTag";
 import { useState } from "react";
 
@@ -30,13 +30,7 @@ export default function UpdatesPage({ blogs }) {
           <Collapse in={!limit} timeout={500}>
             <Stack spacing={2} direction="column" sx={{ alignItems: 'center' }}>
               {blogs.slice(3).map((blog, index) => (
-                <Fade 
-                  key={index + 3} 
-                  in={!limit} 
-                  timeout={300 + (index * 150)}
-                >
-                  <UpdateTag blog={blog} />
-                </Fade>
+                <UpdateTag key={index + 3} blog={blog} />
               ))}
             </Stack>
           </Collapse>
