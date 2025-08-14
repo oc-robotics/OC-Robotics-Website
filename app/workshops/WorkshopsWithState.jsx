@@ -11,6 +11,7 @@ export default function WorkshopsWithState({ workshops }) {
   const all = workshops
 
   const [selectedWorkshop, setSelectedWorkshop] = React.useState("all")
+  const [hashed, setHashed] = React.useState("")
 
   useEffect(() => {
     // Function to handle scrolling to element based on URL hash
@@ -22,6 +23,7 @@ export default function WorkshopsWithState({ workshops }) {
         // Check if it's a workshop ID (format: workshop-123)
         if (elementId.startsWith('workshop-')) {
           const workshopId = elementId.replace('workshop-', '');
+          setHashed(workshopId);
           const workshop = workshops.find(w => w.id.toString() === workshopId);
           if (workshop) {
             
@@ -73,6 +75,8 @@ export default function WorkshopsWithState({ workshops }) {
   }
 
   console.log('Workshops received:', workshops.length)
+  console.log('Current hashed state:', hashed)
+  console.log('Workshop IDs:', workshops.map(w => ({ id: w.id, type: typeof w.id })))
   const currentData = getCurrentWorkshopData()
 
   return (
@@ -100,7 +104,7 @@ export default function WorkshopsWithState({ workshops }) {
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map(workshop => (
               <Grid item xs={12} sm={6} md={4} key={workshop.id} size={6}>
-                <WorkshopCards id={workshop.id} workshop={workshop} />
+                <WorkshopCards id={workshop.id} workshop={workshop} targetId={hashed} />
               </Grid>
             ))}
           </Grid>
