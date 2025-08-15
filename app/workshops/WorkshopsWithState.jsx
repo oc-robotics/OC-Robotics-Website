@@ -73,10 +73,7 @@ export default function WorkshopsWithState({ workshops }) {
         return { workshops: all }
     }
   }
-
-  console.log('Workshops received:', workshops.length)
-  console.log('Current hashed state:', hashed)
-  console.log('Workshop IDs:', workshops.map(w => ({ id: w.id, type: typeof w.id })))
+  
   const currentData = getCurrentWorkshopData()
 
   return (
