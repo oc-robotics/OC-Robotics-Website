@@ -24,7 +24,7 @@ export default function BackToTopButton() {
 			position: "fixed",
 			bottom: "32px",
 			right: "32px",
-			backgroundColor: "#0080ffff",
+			backgroundColor: "secondary.main",
 			borderRadius: "50%",
 		}}>
 			<Tooltip title="Back to top" arrow>

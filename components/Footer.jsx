@@ -4,7 +4,7 @@ import React from 'react'
 export default function Footer() {
   return (
     <Container component="footer" maxWidth="false" sx={{
-      bgcolor: 'primary.main',
+      bgcolor: 'secondary.main',
       color: 'white',
       py: 2,
       width: '100%',

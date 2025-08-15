@@ -31,7 +31,7 @@ export default function WorkshopCards({ workshop, targetId }) {
           }
         },
         height: '100%',
-        boxShadow: 3,
+        boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
         borderRadius: 2,
         overflow: 'hidden',
         transition: 'transform 0.6s box-shadow 0.3s',
@@ -49,10 +49,10 @@ export default function WorkshopCards({ workshop, targetId }) {
         <CardHeader
           avatar={
             <Avatar sx={{
-              color: 'primary.main',
+              color: 'secondary.main',
               bgcolor: 'transparent'
             }}>
-              {workshop.type === 'business' && <Work />}
+              {workshop.type === 'business' && <Work/>}
               {workshop.type === 'mechanical' && <Construction />}
               {workshop.type === 'electrical' && <FlashOn />}
               {workshop.type === 'software' && <Laptop />}
@@ -61,12 +61,15 @@ export default function WorkshopCards({ workshop, targetId }) {
           title={workshop.title}
           subheader={workshop.date}
           sx={{
-            pl: 0,
-            pt: 0,
+
+            minHeight: '6em',
+            p: 0,
+            pl: 1,
           }}
         />
         <Typography variant="body2" color="text.secondary"sx={{
           height: '6em',
+          lineHeight: '2em',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           display: '-webkit-box',

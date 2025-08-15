@@ -7,7 +7,7 @@ export default function UpdatesPage({ blogs }) {
   const [limit, setLimit] = useState(true);
   return(
     <Container>
-      <Typography variant="h1">Weekly Updates</Typography>
+      <Typography variant="h1" sx={{ my: 4}}>Weekly Updates</Typography>
       <Paper elevation={3} sx={{
         p: 2,
         borderRadius: 2,
@@ -36,7 +36,18 @@ export default function UpdatesPage({ blogs }) {
           </Collapse>
         </Stack>
         <Box sx={{display: 'flex', justifyContent: 'flex-end', mt: 2}}>
-          <Button onClick={() => setLimit(!limit)} variant="outlined">
+          <Button 
+            onClick={() => setLimit(!limit)} 
+            variant="outlined"
+            sx={{
+              backgroundColor: 'background.paper',
+              height: '100%',
+              color: '#ffffff',
+              '&:hover': {
+                backgroundColor: 'secondary.main',
+              },
+            }}
+          >
               {limit ? "View All Updates" : "View Less Updates"}
           </Button>
         </Box>

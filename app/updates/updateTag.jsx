@@ -2,18 +2,19 @@
 import { Box, Typography, Chip } from "@mui/material";
 
 export default function UpdateTag({ blog }) {
+  const tags = (blog.tags).toString().split(',').map(tag => tag.trim());
   function getChipColor(tag) {
-    switch (tag) {
-      case 'Software':
+    switch (tag.toLowerCase()) {
+      case 'software':
         return '#d21919';
-      case 'Mechanical':
-        return '#0f53b8';
-      case 'Business':
+      case 'mechanical':
+        return '#08cdeb';
+      case 'business':
         return '#29eb66';
-      case 'Electrical':
+      case 'electrical':
         return '#ffd700';
-      case 'Club':
-        return '#f57c00';
+      case 'club':
+        return '#c8732c';
       default:
         return '#9e9e9e';
     }
@@ -26,9 +27,9 @@ export default function UpdateTag({ blog }) {
       p: 3,
       pr: 0,
       mx: 'auto',
-      borderInlineStart: '3px solid',
-      borderColor: 'primary.main',
-      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
+      borderInlineStart: '6px solid',
+      borderColor: 'secondary.main',
+      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
       borderRadius: 2,
       my: 1,
       display: 'flex',
@@ -56,7 +57,7 @@ export default function UpdateTag({ blog }) {
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>{blog.date}</Typography>
           </Box>
           <Box sx={{ mt: 1 }}>
-            {blog.tags.map((tag, index) => (
+            {tags.map((tag, index) => (
               <Chip
                 key={index}
                 label={tag}

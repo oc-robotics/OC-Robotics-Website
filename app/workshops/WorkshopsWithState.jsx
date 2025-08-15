@@ -73,18 +73,34 @@ export default function WorkshopsWithState({ workshops }) {
         return { workshops: all }
     }
   }
-  
+
   const currentData = getCurrentWorkshopData()
 
   return (
     <Container>
-      <Typography variant="h3" sx={{ my: 4, fontWeight: 'bold' }}>Workshops</Typography>
+      <Typography variant="h1" sx={{ my: 4 }}>Workshops</Typography>
       <FormControl sx={{ mb: 4 }}>
-        <InputLabel id="workshop-select-label">Workshop Type</InputLabel>
+        <InputLabel id="workshop-select-label" sx={{ color: 'secondary.main', '&.Mui-focused': { color: 'secondary.main' }}}>Workshop Type</InputLabel>
         <Select
           labelId="workshop-select-label"
           label="Workshop Type"
           value={selectedWorkshop}
+          sx={{
+            color: '#ffffff',
+            '& .MuiOutlinedInput-input':{
+              padding: "20px 14px"
+            },
+            '& .MuiSelect-icon': {
+              color: '#ffffff',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'secondary.main',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'secondary.main',
+              borderWidth: '1px'
+            }
+          }}
           onChange={e => setSelectedWorkshop(e.target.value)}
         >
           <MenuItem value="all">All Workshops</MenuItem>
@@ -100,7 +116,7 @@ export default function WorkshopsWithState({ workshops }) {
             {currentData.workshops
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map(workshop => (
-              <Grid item xs={12} sm={6} md={4} key={workshop.id} size={6}>
+              <Grid item key={workshop.id} size={6}>
                 <WorkshopCards id={workshop.id} workshop={workshop} targetId={hashed} />
               </Grid>
             ))}

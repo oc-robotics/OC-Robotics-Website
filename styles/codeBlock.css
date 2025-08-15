@@ -1,12 +1,14 @@
 pre {
-  background: #f6f8fa !important;
-  color: #24292e !important;
+  background: #0c243c !important;
+  color: #ffffff !important;
   border-radius: 6px;
   padding: 1em;
   overflow-x: auto;
 }
 
 code {
+  background: #0c243c !important;
+  color: #ffffff !important;
   font-family: 'Fira Mono', 'Menlo', 'Consolas', monospace;
   font-size: 1em;
 }

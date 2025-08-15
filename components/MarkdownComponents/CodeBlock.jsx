@@ -28,18 +28,18 @@ export default function CodeBlock({ children, ...props }) {
           top: 8,
           right: 8,
           zIndex: 2,
-          background: '#eee',
+          background: 'transparent',
           border: 'none',
           borderRadius: 4,
           padding: '2px 8px',
           cursor: 'pointer',
-          border: copied ? '1px solid green' : '1px solid #ccc',
+          border: copied ? '1px solid green' : '1px solid #444',
           borderRadius: '4px',
-          '&:hover': { background: '#ddd' },
+          '&:hover': { background: '#333' },
           minWidth: '32px',
         }}
       >
-        {copied ? <CheckRounded fontSize="small" sx={{ color: 'green' }} /> : <ContentCopyRounded fontSize="small" />}
+        {copied ? <CheckRounded fontSize="small" sx={{ color: 'green' }} /> : <ContentCopyRounded fontSize="small" sx={{color: 'white'}} />}
       </Button>
       <pre {...props} style={{ margin: 0 }}>
         {React.cloneElement(children, { ref: codeRef })}

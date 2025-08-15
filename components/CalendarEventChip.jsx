@@ -123,7 +123,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
         <Card sx={{ 
           position: 'fixed', 
           zIndex: 1000, 
-          maxWidth: 300,
+          maxWidth: 400,
           maxHeight: '40vh',
           right: 12,
           bottom: 36,
@@ -139,7 +139,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
               <Tooltip title="Copy Event Details" arrow placement="top">
                 <Notifications onClick={handleEventAnnouncement} sx={{
                   cursor: 'pointer',
-                  color: 'primary.main',
+                  color: '#CA8136',
                   borderRadius: '50%',
                   transition: 'background-color 0.3s, transform 0.3s',
                   '&:hover': {
@@ -168,16 +168,16 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
               alignItems: 'flex-start',
               justifyContent: 'flex-start'
             }}>
-              <Typography variant="h6">
+              <Typography variant="h6" sx={{mb: 2}}>
                 {event.title}
               </Typography>
-              <Divider sx={{ my: 1, width: '100%', borderColor: 'primary.main' }} />
               <Typography variant="body2">
                 {isAllDay ? 'All Day' : `${formatDate(eventStart)}, ${formatTime(eventStart)} - ${formatTime(eventEnd)}`}
               </Typography>
               <Typography variant="body2">
                 {formatLocation(eventLocation)}
               </Typography>
+              <Divider sx={{ my: 1, width: '100%', borderColor: '#ccc' }} />
               <Typography variant="body1" sx={{
                 display: '-webkit-box',
                 overflow: 'hidden',
@@ -193,7 +193,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
               </Typography>
             </Box>
             <Box sx={{ mt: 2, display: 'flex', gap: 1, flexDirection: 'row' }}>
-              <Tooltip title="View on Google Calendar" arrow placement="bottom">
+              <Tooltip title="View on Google Calendar" arrow placement="top">
                 <Button 
                   variant="outlined" 
                   size="small" 
@@ -201,13 +201,13 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                   href={event.link}
                   target="_blank"
                   sx={{
-                    color: 'primary.main',
-                    borderColor: 'primary.main',
+                    color: '#fff',
+                    borderColor: '#fff',
                     height: "40px",
                     borderRadius: "20px",
                     '&:hover': {
-                      backgroundColor: 'primary.main',
-                      color: 'white',
+                      borderColor: 'secondary.main',
+                      color: 'secondary.main',
                     }
                   }}
                 >
@@ -215,7 +215,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                 </Button>
               </Tooltip>
               {eventLocation && (
-                <Tooltip title="View on Map" arrow placement="bottom">
+                <Tooltip title="View on Map" arrow placement="top">
                   <Button
                     variant="outlined"
                     size="small"
@@ -223,13 +223,13 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                     href={eventLocation}
                     target="_blank"
                     sx={{
-                      color: 'primary.main',
-                      borderColor: 'primary.main',
+                      color: '#fff',
+                      borderColor: '#fff',
                       height: "40px",
                       borderRadius: "20px",
                       '&:hover': {
-                        backgroundColor: 'primary.main',
-                        color: 'white',
+                        borderColor: 'secondary.main',
+                        color: 'secondary.main',
                       }
                     }}
                   >
@@ -238,7 +238,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                 </Tooltip>
               )}
               {workshopHaveLink && (
-                <Tooltip title="View Workshop Details" arrow placement="bottom">
+                <Tooltip title="View Workshop Details" arrow placement="top">
                   <Button
                     variant="outlined"
                     size="small"
@@ -246,13 +246,13 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
                     href={workshopHaveLink}
                     target="_blank"
                     sx={{
-                      color: 'primary.main',
-                      borderColor: 'primary.main',
+                      color: '#fff',
+                      borderColor: '#fff',
                       height: "40px",
                       borderRadius: "20px",
                       '&:hover': {
-                        backgroundColor: 'primary.main',
-                        color: 'white',
+                        borderColor: 'secondary.main',
+                        color: 'secondary.main',
                       }
                     }}
                   >

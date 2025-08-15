@@ -31,8 +31,7 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
       width: '100%',
     }}>
       <DocumentListSideBar documentList={documentList} style={{ width: '40%' }} />
-      <Box sx={{ flexGrow: 1, px: 2 }}>
-        
+      <Box sx={{ flexGrow: 1, px: 2 }}>    
         <Paper className="markdown-body" sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
           <Typography variant="h4" gutterBottom>
           {frontmatter.title}
