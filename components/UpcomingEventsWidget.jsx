@@ -102,15 +102,12 @@ export default async function UpcomingEventsWidget({ count }) {
   }
 
   return (
-    <Paper sx={{
-      backgroundColor: 'white',
+    <Paper elevation={3} sx={{
       borderRadius: '8px',
-      boxShadow: 2,
       p: 3,
       mx: 'auto'
     }}>
       <Typography variant='h3'>Upcoming Week Events</Typography>
-
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -178,15 +175,15 @@ export default async function UpcomingEventsWidget({ count }) {
           )
         })}
       </Box>
-      
-      <Box className="mt-4">
+      <Box sx={{ mt: 1 }}>
         <Button component={Link} href="/events" variant="outlined" sx={{
           my: 2,
           p: 1,
           width: 'auto',
           height: '40px',
           borderRadius: '20px',
-          color: 'primary.main',
+          borderColor: 'secondary.main',
+          color: 'secondary.main',
           transition: 'scale 0.3s',
           '&:hover': {
             cursor: 'pointer',

@@ -3,6 +3,7 @@ import ClientThemeProvider from '@/components/ClientThemeProvider'
 import Footer from '@/components/Footer'
 import NavBar from '@/components/Navbar'
 import { Container } from '@mui/material'
+import BackToTopButton from '@/components/BackToTopButton'
 
 export const metadata = {
   title: 'OC Robotics',
@@ -10,7 +11,7 @@ export const metadata = {
   keywords: 'robotics, automation, engineering, innovation, technology, OCC Robotics',
   authors: [{ name: 'OC-Robotics' }],
   icons: {
-    icon: '/oc-robotics-icon.png',
+    icon: '/oc-robotics-icon.png', 
   },
   charset: 'utf-8',
 }
@@ -23,10 +24,11 @@ export default function RootLayout({ children }) {
       <body style={{ margin: 0, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <ClientThemeProvider>
           <NavBar />
-          <Container sx={{mb: 4}}>
+          <Container sx={{mb: 4, flexGrow: 1, px: 2}} maxWidth="false">
             {children}
           </Container>
           <Footer />
+          <BackToTopButton />
         </ClientThemeProvider>
       </body>
     </html>

@@ -7,12 +7,7 @@ function DefaultDocument({ documentList }) {
     <Container sx={{
         py: 4
     }}>
-      <Box component="img" src='/oc-robotics-icon.png' alt="Documentation" sx={{
-        mb: 2,
-        maxWidth: '20%',
-        height: 'auto'
-      }} />
-      <Typography variant="h2" gutterBottom>
+      <Typography variant="h1" gutterBottom>
         Documentations
       </Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>

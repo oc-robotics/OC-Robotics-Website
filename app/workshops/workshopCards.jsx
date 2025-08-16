@@ -1,15 +1,19 @@
 'use client'
-import {Card, CardContent, CardHeader, Typography, Avatar, Box, CardMedia } from '@mui/material';
+import {Card, CardContent, CardHeader, Typography, Avatar, Box, CardMedia, Skeleton } from '@mui/material';
 import { Work, Construction, FlashOn, Laptop } from '@mui/icons-material';
 import { useState } from 'react';
 
 export default function WorkshopCards({ workshop, targetId }) {
   const isTargeted = targetId && targetId === workshop.id.toString();
   const [remind, setRemind] = useState(isTargeted);
+  const [isIframeLoading, setIsIframeLoading] = useState(true);
   const animation = remind ? 'bouncing 0.6s infinite' : 'none';
   const handleCardClick = () => {
     window.open(workshop.slidesUrl, '_blank', 'fullscreen=yes,scrollbars=yes,resizable=yes');
   };
+
+  // Only create embed URL if we have a valid slides URL
+  const slideUrl = workshop.slidesUrl && workshop.slidesUrl.trim() !== '' ? `${workshop.slidesUrl}?embed` : null;
 
   return (
     <Card 
@@ -26,7 +30,8 @@ export default function WorkshopCards({ workshop, targetId }) {
             transform: "translateY(0)"
           }
         },
-        boxShadow: 3,
+        height: '100%',
+        boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
         borderRadius: 2,
         overflow: 'hidden',
         transition: 'transform 0.6s box-shadow 0.3s',
@@ -44,10 +49,10 @@ export default function WorkshopCards({ workshop, targetId }) {
         <CardHeader
           avatar={
             <Avatar sx={{
-              color: 'primary.main',
+              color: 'secondary.main',
               bgcolor: 'transparent'
             }}>
-              {workshop.type === 'business' && <Work />}
+              {workshop.type === 'business' && <Work/>}
               {workshop.type === 'mechanical' && <Construction />}
               {workshop.type === 'electrical' && <FlashOn />}
               {workshop.type === 'software' && <Laptop />}
@@ -56,11 +61,21 @@ export default function WorkshopCards({ workshop, targetId }) {
           title={workshop.title}
           subheader={workshop.date}
           sx={{
-            pl: 0,
-            pt: 0,
+
+            minHeight: '6em',
+            p: 0,
+            pl: 1,
           }}
         />
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary"sx={{
+          height: '6em',
+          lineHeight: '2em',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          WebkitLineClamp: 3,
+        }}>
           {workshop.description}
         </Typography>
         <CardMedia sx={{
@@ -77,12 +92,28 @@ export default function WorkshopCards({ workshop, targetId }) {
           borderRadius: "8px",
           willChange: "transform"
         }}>
+          {isIframeLoading && (
+            <Skeleton 
+              variant='rounded'
+              animation="wave"
+              sx={{
+                position: "absolute",
+                height: '100%',
+                width: '100%',
+                top: 0,
+                left: 0,
+                zIndex: 1
+              }}
+            />
+          )}
           <Box 
             component="iframe" 
             title={workshop.title}
             loading="lazy"
-            src={`${workshop.slidesUrl}?embed`}
+            src={slideUrl}
             allowFullScreen
+            onLoad={() => setIsIframeLoading(false)}
+            onError={() => setIsIframeLoading(false)}
             sx={{
               position: "absolute",
               width: "100%",
@@ -91,7 +122,9 @@ export default function WorkshopCards({ workshop, targetId }) {
               left: 0,
               border: "none",
               padding: 0,
-              margin: 0
+              margin: 0,
+              opacity: isIframeLoading ? 0 : 1,
+              transition: 'opacity 1s ease-in-out'
             }}
           />
         </CardMedia>

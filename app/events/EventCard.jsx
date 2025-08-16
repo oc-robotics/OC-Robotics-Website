@@ -10,22 +10,22 @@ export default function EventCard({ event }) {
   let color;
   if (event.title.toLowerCase().includes('meeting')) {
     type = 'Meeting';
-    color = '#4caf50';
+    color = '#c8732c';
   } else if (event.title.toLowerCase().includes('workshop')) {
     type = 'Workshop';
     color = '#f44336';
   } else if (event.title.toLowerCase().includes('social')) {
     type = 'Social';
-    color = '#ff9800';
+    color = '#2bff00';
   } else if (event.title.toLowerCase().includes('networking')) {
     type = 'Networking';
-    color = '#3f51b5';
+    color = '#e3dc0aff';
   } else if (event.title.toLowerCase().includes('competition')) {
     type = 'Competition';
     color = '#9c27b0';
   } else if (event.title.toLowerCase().includes('drop-in')) {
     type = 'Optional Drop-in';
-    color = '#1976d2';
+    color = '#08cdeb';
   } else {
     type = 'Other';
     color = '#9e9e9e';
@@ -152,7 +152,7 @@ export default function EventCard({ event }) {
                   transition: 'transform 0.2s, color 0.2s',
                   fontSize: '2rem',
                   '&:hover': {
-                    color: 'primary.main',
+                    color: 'secondary.main',
                     transform: 'scale(1.1)',
                   },
                 }}
@@ -168,7 +168,7 @@ export default function EventCard({ event }) {
                   transition: 'transform 0.2s, color 0.2s',
                   fontSize: '2rem',
                   '&:hover': {
-                    color: 'primary.main',
+                    color: 'secondary.main',
                     transform: 'scale(1.1)',
                   },
                 }} 

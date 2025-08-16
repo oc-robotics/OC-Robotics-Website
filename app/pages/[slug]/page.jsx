@@ -12,7 +12,7 @@ import {rehypeToc} from "@/lib/rehypeToc.js";
 import '@/styles/codeBlock.css';
 
 const options={
-  theme: 'github-light', // or 'dark'
+  theme: 'github-dark', // or 'dark'
   defaultLanguage: "plaintext",
   autoHeight: true,
 }

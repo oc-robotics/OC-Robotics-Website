@@ -32,7 +32,7 @@ export const h1Link = ({ id, ...rest }) => {
                 <Tooltip title={copied ? "Copied!" : "Copy link"} arrow>
                     <LinkRounded
                         onClick={handleCopy}
-                        sx={{ cursor: 'pointer', color: 'text.secondary', m: "1.2rem 0 0.5rem" }}
+                        sx={{ cursor: 'pointer', color: 'secondary.main', m: "1.2rem 0 0.5rem" }}
                         fontSize="medium"
                     />
                 </Tooltip>
@@ -71,7 +71,7 @@ export const h2Link = ({ id, ...rest }) => {
                 <Tooltip title={copied ? "Copied!" : "Copy link"} arrow>
                     <LinkRounded
                         onClick={handleCopy}
-                        sx={{ cursor: 'pointer', color: 'text.secondary', m: "1.2rem 0 0.5rem" }}
+                        sx={{ cursor: 'pointer', color: 'secondary.main', m: "1.2rem 0 0.5rem" }}
                         fontSize="medium"
                     />
                 </Tooltip>

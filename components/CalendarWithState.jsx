@@ -129,8 +129,8 @@ export default function CalendarWithState({ events, workshops }) {
                 sx={{
                   color: dayObj.isCurrentMonth ? 'text.primary' : 'text.disabled',
                   fontWeight: isToday ? 'bold' : 'normal',
-                  backgroundColor: isToday ? 'primary.main' : 'transparent',
-                  color: isToday ? 'white' : (dayObj.isCurrentMonth ? 'text.primary' : 'text.disabled'),
+                  backgroundColor: isToday ? 'secondary.main' : 'transparent',
+                  color: dayObj.isCurrentMonth ? 'text.primary' : 'text.disabled',
                   borderRadius: isToday ? '50%' : '0',
                   width: '30px',
                   height: '30px',

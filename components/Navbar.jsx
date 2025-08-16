@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import {
   AppBar,
-  Container,
+  Box,
   Toolbar,
   Button,
-  Box,
   Menu,
   MenuItem,
   IconButton,
@@ -41,56 +40,52 @@ function Navbar() {
   ];
 
   return (
-    <Box>
-      <AppBar position="static">
-        <Container>
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              OC Robotics
-            </Typography>
-            
-            {isMobile ? (
-              <>
-                <IconButton
-                  color="inherit"
-                  aria-label="menu"
-                  onClick={handleMenuOpen}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                >
-                  {menuItems.map((item) => (
-                    <MenuItem key={item.label} component={Link} href={item.href} onClick={handleMenuClose}>
-                      {item.label}
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </>
-            ) : (
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                {menuItems.map((item) => (
-                  <Button key={item.label} component={Link} href={item.href} color="inherit">
-                    {item.label}
-                  </Button>
-                ))}
-              </Box>
-            )}
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
+    <AppBar position="static" sx={{ backgroundColor: 'secondary.main' }}>
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          OC Robotics
+        </Typography>
+        
+        {isMobile ? (
+          <>
+            <IconButton
+              color="inherit"
+              aria-label="menu"
+              onClick={handleMenuOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              {menuItems.map((item) => (
+                <MenuItem key={item.label} component={Link} href={item.href} onClick={handleMenuClose}>
+                  {item.label}
+                </MenuItem>
+              ))}
+            </Menu>
+          </>
+        ) : (
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            {menuItems.map((item) => (
+              <Button key={item.label} component={Link} href={item.href} color="inherit">
+                {item.label}
+              </Button>
+            ))}
+          </Box>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 

@@ -25,14 +25,30 @@ export default function EventsPageWithState({ allRecentEvents }) {
 
   return (
     <Container>
-      <Typography variant="h3" sx={{ my: 4, fontWeight: 'bold' }}>Upcoming Events</Typography>
+      <Typography variant="h1" sx={{ my: 4 }}>Upcoming Events</Typography>
       <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <FormControl>
-          <InputLabel id="event-select-label">Filter Event</InputLabel>
+        <FormControl sx={{bgColor: 'background.paper'}}>
+          <InputLabel id="event-select-label" sx={{ color: 'secondary.main', '&.Mui-focused': { color: 'secondary.main' }}}>Filter Event</InputLabel>
           <Select
             labelId="event-select-label"
             label="Event Type"
             value={selectedEvent}
+            sx={{
+              color: '#ffffff',
+              '& .MuiOutlinedInput-input':{
+                padding: "20px 14px"
+              },
+              '& .MuiSelect-icon': {
+                color: '#ffffff',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'secondary.main',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'secondary.main',
+                borderWidth: '1px'
+              }
+            }}
             onChange={e => setSelectedEvent(e.target.value)}
           >
             <MenuItem value="all">All Recent Events</MenuItem>
@@ -40,12 +56,25 @@ export default function EventsPageWithState({ allRecentEvents }) {
             <MenuItem value="past">Past Events</MenuItem>
           </Select>
         </FormControl>
-        <Button variant="contained" color="primary" onClick={() => {
-          const event = currentData.events[0];
-          if (event) {
-            window.open(event.link, '_blank');
-          }
-        }}>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          onClick={() => {
+            const event = currentData.events[0];
+            if (event) {
+              window.open(event.link, '_blank');
+            }
+          }}
+          sx={{
+            backgroundColor: 'background.paper',
+            height: '100%',
+            color: '#ffffff',
+            p: "20px 14px",
+            '&:hover': {
+              backgroundColor: 'secondary.main',
+            },
+          }}
+        >
           View in Google Calendar
         </Button>
       </Box>
