@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <body style={{ margin: 0, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <ClientThemeProvider>
           <NavBar />
-          <Container sx={{mb: 4, flexGrow: 1, px: 2, mt: 3}} maxWidth="false">
+          <Container sx={{mb: 4, flexGrow: 1, px: 2}} maxWidth="false">
             {children}
           </Container>
           <Footer />
