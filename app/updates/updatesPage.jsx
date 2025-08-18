@@ -1,5 +1,5 @@
 'use client'
-import { Container, Typography, Paper, Stack, Button, Box, Collapse } from "@mui/material";
+import { Container, Typography, Paper, Stack, Button, Box, Collapse, Grow } from "@mui/material";
 import UpdateTag from "./updateTag";
 import { useState } from "react";
 
@@ -20,7 +20,8 @@ export default function UpdatesPage({ blogs }) {
             mt: 2,
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
+          }}
+        >
           {/* Always show first 3 blogs */}
           {blogs.slice(0, 3).map((blog, index) => (
             <UpdateTag key={index} blog={blog} />

@@ -8,7 +8,6 @@ export default function Footer() {
       color: 'white',
       py: 2,
       width: '100%',
-      mt: 'auto',
     }}>
       <Typography variant="body2" align="center">
         © {new Date().getFullYear()} OC Robotics. All rights reserved.

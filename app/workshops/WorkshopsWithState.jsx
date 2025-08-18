@@ -116,7 +116,7 @@ export default function WorkshopsWithState({ workshops }) {
             {currentData.workshops
               .sort((a, b) => new Date(b.date) - new Date(a.date))
               .map(workshop => (
-              <Grid item key={workshop.id} size={6}>
+              <Grid item key={workshop.id} size={{ xs: 12, workshop: 6 }}>
                 <WorkshopCards id={workshop.id} workshop={workshop} targetId={hashed} />
               </Grid>
             ))}

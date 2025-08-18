@@ -40,7 +40,7 @@ function Navbar() {
   ];
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'secondary.main' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'secondary.main', zIndex: 30}}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           OC Robotics

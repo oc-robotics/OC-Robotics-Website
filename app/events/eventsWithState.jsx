@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { Container, Typography, FormControl, InputLabel, Select, MenuItem, Grow, Stack, Box, Button } from '@mui/material';
+import { Container, Typography, FormControl, InputLabel, Select, MenuItem, Grow, Stack, Box, Button, Paper } from '@mui/material';
 import EventCard from "./EventCard";
 
 export default function EventsPageWithState({ allRecentEvents }) {
@@ -26,7 +26,14 @@ export default function EventsPageWithState({ allRecentEvents }) {
   return (
     <Container>
       <Typography variant="h1" sx={{ my: 4 }}>Upcoming Events</Typography>
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box sx={{ 
+        mb: 4, 
+        display: 'flex', 
+        justifyContent: {xxs: 'space-evenly', events: 'space-between'}, 
+        gap: {xxs: 2, sm: 'auto'},
+        alignItems: {xxs: 'flex-start', events: 'center'}, 
+        flexDirection: { xxs: 'column', events: 'row' }
+      }}>
         <FormControl sx={{bgColor: 'background.paper'}}>
           <InputLabel id="event-select-label" sx={{ color: 'secondary.main', '&.Mui-focused': { color: 'secondary.main' }}}>Filter Event</InputLabel>
           <Select
@@ -78,14 +85,20 @@ export default function EventsPageWithState({ allRecentEvents }) {
           View in Google Calendar
         </Button>
       </Box>
-      <Grow in={true} key={selectedEvent}>
-        <Stack spacing={2}>
-          {currentData.events
-            .map(event => (
-              <EventCard key={event.id} event={event} />
-          ))}
-        </Stack>
-      </Grow>
+      <Paper elevation={3} sx={{
+        p: 2,
+        borderRadius: 2,
+        my: 2,
+      }}>
+        <Grow in={true} key={selectedEvent}>
+          <Stack spacing={2}>
+            {currentData.events
+              .map(event => (
+                <EventCard key={event.id} event={event} />
+            ))}
+          </Stack>
+        </Grow>
+      </Paper>
     </Container>
   );
 }

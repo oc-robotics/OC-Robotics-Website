@@ -1,5 +1,5 @@
 import { getEventsNextWeek } from '../lib/calendarData.js';
-import { Box, Typography, Paper, Chip, Button } from '@mui/material';
+import { Box, Typography, Paper, Chip, Button, Divider } from '@mui/material';
 import Link from 'next/link';
 
 export default async function UpcomingEventsWidget({ count }) {
@@ -107,7 +107,7 @@ export default async function UpcomingEventsWidget({ count }) {
       p: 3,
       mx: 'auto'
     }}>
-      <Typography variant='h3'>Upcoming Week Events</Typography>
+      <Typography variant='h2'>Upcoming Week Events</Typography>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -118,7 +118,8 @@ export default async function UpcomingEventsWidget({ count }) {
           const { type, color } = getEventType(event);
           const workshopHaveLink = type === 'Workshop' && extractUrlFromAnchor(event.description);
           return (
-            <Box 
+            <Paper 
+              elevation={7}
               key={event.id}
               sx={{
                 mb: 2,
@@ -126,14 +127,10 @@ export default async function UpcomingEventsWidget({ count }) {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                boxShadow: 1,
                 borderRadius: '8px',
+                borderLeft: `4px solid ${color}`,
                 p: 2,
                 transition: 'transform 0.3s',
-                cursor: 'pointer',
-                '&:hover': {
-                  transform: 'translateY(-3px)',
-                }
               }}
             >
               <Box sx={{
@@ -142,17 +139,18 @@ export default async function UpcomingEventsWidget({ count }) {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
-                justifyContent: 'space-evenly'
               }}>
-                <Typography variant='h4' >{event.title}</Typography>
-                <Box>
-                  {formatDate(event.start)}, {formatTime(event.start)} - {formatTime(event.end)}
+                <Typography variant='h3'>{event.title}</Typography>
+                <Box sx={{mt: 1}}>
+                  <Typography variant='body2'>
+                    {formatDate(event.start)}, {formatTime(event.start)} - {formatTime(event.end)}
+                  </Typography>
                   <Typography variant='body2'>
                     {formatLocation(event.location)}
                   </Typography>
                 </Box>
                 <Typography variant='body2' >
-                  {workshopHaveLink ? <>Slides are available</> : 'No description available'}
+                  {workshopHaveLink ? <>Slides are available</> : <>{event.description}</>}
                 </Typography>
                 {workshopHaveLink && (
                   <Box component={Link} href={extractUrlFromAnchor(event.description)} target="_blank" rel="noopener" sx={{
@@ -164,6 +162,7 @@ export default async function UpcomingEventsWidget({ count }) {
                 )}
               </Box>
               <Chip label={type} variant="outlined" sx={{
+                display: {xxs: 'none', xs: 'flex'},
                 borderColor: color,
                 backgroundColor: `${color}10`,
                 color: color,
@@ -171,7 +170,7 @@ export default async function UpcomingEventsWidget({ count }) {
                   borderColor: color,
                 },
               }}/>
-            </Box>
+            </Paper>
           )
         })}
       </Box>

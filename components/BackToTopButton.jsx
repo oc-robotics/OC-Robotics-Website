@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function BackToTopButton() {
 	const [show, setShow] = useState(false);
-	const [bottomOffset, setBottomOffset] = useState(32);
+	const [bottomOffset, setBottomOffset] = useState(16);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -48,7 +48,7 @@ export default function BackToTopButton() {
 			height: "45px",
 			position: "fixed",
 			bottom: `${bottomOffset}px`,
-			right: "32px",
+			right: "10px",
 			backgroundColor: "secondary.main",
 			borderRadius: "50%",
 			transition: "bottom 0.3s ease-in-out",

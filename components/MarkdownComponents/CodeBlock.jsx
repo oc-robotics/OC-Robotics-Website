@@ -20,7 +20,7 @@ export default function CodeBlock({ children, ...props }) {
   };
   
   return (
-    <Box style={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative', my: '1em' }}>
       <Fade in={hovered}>
         <Button
           onMouseEnter={() => setHovered(true)}
