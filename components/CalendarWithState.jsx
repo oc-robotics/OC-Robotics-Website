@@ -1,14 +1,19 @@
 'use client'
-import { useState, useEffect } from "react";
-import { Typography, Grid, Paper } from "@mui/material";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Typography, Grid, Paper, Slide, Box } from "@mui/material";
 import CalendarEventChip from "./CalendarEventChip";
 
 export default function CalendarWithState({ events, workshops }) {
   const [activePopup, setActivePopup] = useState(null);
+  const [showEvent, setShowEvent] = useState(false);
 
-  const handlePopupToggle = (chipId, event) => {
+  const handlePopupToggle = useCallback((chipId, event) => {
     setActivePopup(chipId);
-  };
+  }, []);
+
+  const handleDayClick = useCallback(() => {
+    setShowEvent(true);
+  }, []);
 
   // Handle click outside to close popup
   useEffect(() => {
@@ -27,7 +32,7 @@ export default function CalendarWithState({ events, workshops }) {
   const currentYear = new Date().getFullYear();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const currentMonth = new Date().getMonth();
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const getNumberOfDaysInMonth = (month, year) => {
     return new Date(year, month + 1, 0).getDate();
@@ -38,7 +43,7 @@ export default function CalendarWithState({ events, workshops }) {
   };
 
   // Generate calendar grid
-  const generateCalendarDays = () => {
+  const calendarDays = useMemo(() => {
     const daysInCurrentMonth = getNumberOfDaysInMonth(currentMonth, currentYear);
     const firstDayOfMonth = getFirstDayOfMonth(currentMonth, currentYear);
     
@@ -78,9 +83,24 @@ export default function CalendarWithState({ events, workshops }) {
     }
     
     return calendarDays;
-  };
+  }, [currentMonth, currentYear]);
 
-  const calendarDays = generateCalendarDays();
+  // Memoize events by day to prevent re-filtering on every render
+  const eventsByDay = useMemo(() => {
+    const eventsMap = new Map();
+    
+    events.forEach(event => {
+      const eventDate = new Date(event.start);
+      const dayKey = `${eventDate.getFullYear()}-${eventDate.getMonth()}-${eventDate.getDate()}`;
+      
+      if (!eventsMap.has(dayKey)) {
+        eventsMap.set(dayKey, []);
+      }
+      eventsMap.get(dayKey).push(event);
+    });
+    
+    return eventsMap;
+  }, [events]);
   const today = new Date().getDate();
 
   return (
@@ -88,7 +108,7 @@ export default function CalendarWithState({ events, workshops }) {
       my: 2,
       p: 2
     }}>
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h2" gutterBottom>
         {monthNames[currentMonth]} {currentYear}
       </Typography>
       <Grid 
@@ -96,7 +116,7 @@ export default function CalendarWithState({ events, workshops }) {
         spacing={1} 
         columns={7}
         sx={{
-          '--Grid-borderWidth': '2px',
+          '--Grid-borderWidth': {xxs: '1px', sm: '2px'},
           borderTop: 'var(--Grid-borderWidth) solid',
           borderLeft: 'var(--Grid-borderWidth) solid',
           borderColor: 'divider',
@@ -118,50 +138,50 @@ export default function CalendarWithState({ events, workshops }) {
           return (
             <Grid size={1} key={index} sx={{ 
               textAlign: 'center',
-              height: '120px',
+              height: {xxs: 'auto', xs: '80px', sm: '120px'},
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'flex-start'
             }}>
-              <Typography 
-                variant="body1" 
-                sx={{
-                  color: dayObj.isCurrentMonth ? 'text.primary' : 'text.disabled',
-                  fontWeight: isToday ? 'bold' : 'normal',
-                  backgroundColor: isToday ? 'secondary.main' : 'transparent',
-                  color: dayObj.isCurrentMonth ? 'text.primary' : 'text.disabled',
-                  borderRadius: isToday ? '50%' : '0',
-                  width: '30px',
-                  height: '30px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                {dayObj.day}
-              </Typography>
-              {events.map(event => {
-                const eventDate = new Date(event.start);
-                const isEventToday = eventDate.getDate() === dayObj.day && eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear && dayObj.isCurrentMonth;
-                if (isEventToday) {
-                  return (
-                    <CalendarEventChip 
-                      key={event.id} 
-                      event={event} 
-                      id={event.id} 
-                      isAllDay={event.allDay}
-                      eventStart={event.start} 
-                      eventEnd={event.end} 
-                      eventLocation={event.location}
-                      activePopup={activePopup}
-                      onPopupToggle={handlePopupToggle}
-                      workshops={workshops}
-                    />
-                  );
-                }
-                return null;
-              })}
+              <Box onClick={() => setShowEvent(true)}>
+                <Typography 
+                  variant="body1" 
+                  sx={{
+                    color: dayObj.isCurrentMonth ? (isToday ? 'white' : 'text.primary') : 'text.disabled',
+                    fontWeight: isToday ? 'bold' : 'normal',
+                    backgroundColor: isToday ? 'secondary.main' : 'transparent',
+                    borderRadius: isToday ? '50%' : '0',
+                    width: {xxs: '1.2rem', xs: '30px'},
+                    height: {xxs: '1.2rem', xs: '30px'},
+                    fontSize: {xxs: '0.65rem', xs: '1rem'},
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {dayObj.day}
+                </Typography>
+              </Box>
+              {(() => {
+                const dayKey = `${currentYear}-${currentMonth}-${dayObj.day}`;
+                const dayEvents = dayObj.isCurrentMonth ? (eventsByDay.get(dayKey) || []) : [];
+                
+                return dayEvents.map(event => (
+                  <CalendarEventChip 
+                    key={event.id} 
+                    event={event} 
+                    id={event.id} 
+                    isAllDay={event.allDay}
+                    eventStart={event.start} 
+                    eventEnd={event.end} 
+                    eventLocation={event.location}
+                    activePopup={activePopup}
+                    onPopupToggle={handlePopupToggle}
+                    workshops={workshops}
+                  />
+                ));
+              })()}
             </Grid>
           );
         })}

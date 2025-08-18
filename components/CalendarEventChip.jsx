@@ -1,6 +1,6 @@
 'use client'
 import { Chip, Box, Typography, Divider, Button, Card, CardContent, Slide, Snackbar, Alert, Tooltip } from "@mui/material";
-import { CalendarMonth, Map, Notifications, Close, School } from "@mui/icons-material";
+import { CalendarMonth, Map, Notifications, Close, School, Circle } from "@mui/icons-material";
 import Link from 'next/link';
 import { useState } from "react";
 
@@ -102,23 +102,47 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
 
   return (
     <Box>
-      <Chip
+      <Box 
         key={id}
-        label={formatTime(eventStart)}
-        variant="outlined"
         onClick={handleChipClick}
         sx={{
-          borderColor: color,
-          backgroundColor: `${color}33`,
           color: color,
           cursor: 'pointer',
           margin: '4px 0',
           width: '100%',
           justifyContent: 'space-between',
-          display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
-      />
+      >
+        <Circle
+          onClick={handleChipClick}
+          sx={{
+            display: { xxs: 'flex', calendar: 'none' },
+            fontSize: {xxs: '0.5em', xs: '0.8em', sm: '1em'},
+            color: color,
+            margin: '4px 0',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        />
+        <Chip
+          label={formatTime(eventStart)}
+          size="small"
+          variant="outlined"
+          sx={{
+            display: { xxs: 'none', calendar: 'flex' },
+            borderColor: color,
+            backgroundColor: `${color}33`,
+            color: color,
+            cursor: 'pointer',
+            margin: '4px 0',
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        />
+      </Box>
       <Slide in={isPopupOpen} direction="up" mountOnEnter unmountOnExit>
         <Card sx={{ 
           position: 'fixed', 

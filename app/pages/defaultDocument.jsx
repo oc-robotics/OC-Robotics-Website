@@ -28,7 +28,7 @@ function DefaultDocument({ documentList }) {
             }}
           >
             <CardContent>
-              <Typography variant="h6">{doc.frontmatter.title || slug}</Typography>
+              <Typography variant="h5">{doc.frontmatter.title || slug}</Typography>
             </CardContent>
           </Card>
         );

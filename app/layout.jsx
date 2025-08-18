@@ -2,8 +2,10 @@ import React from 'react'
 import ClientThemeProvider from '@/components/ClientThemeProvider'
 import Footer from '@/components/Footer'
 import NavBar from '@/components/Navbar'
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 import BackToTopButton from '@/components/BackToTopButton'
+import '@/styles/scrollbar.css'
+import ScrollProgressBar from '@/components/scrollbar'
 
 export const metadata = {
   title: 'OC Robotics',
@@ -21,9 +23,15 @@ export const viewport = 'width=device-width, initial-scale=1';
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <body style={{ 
+        margin: 0, 
+        minHeight: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column',
+      }}>
         <ClientThemeProvider>
           <NavBar />
+          <ScrollProgressBar />
           <Container sx={{mb: 4, flexGrow: 1, px: 2}} maxWidth="false">
             {children}
           </Container>

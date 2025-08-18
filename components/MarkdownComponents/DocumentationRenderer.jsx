@@ -1,6 +1,6 @@
 'use client'
 import { MDXRemote } from 'next-mdx-remote'
-import { Container, Typography, Paper, Box } from '@mui/material'
+import { Typography, Paper, Box } from '@mui/material'
 import Admonitions from '@/components/MarkdownComponents/Admonitions.jsx'
 import CodeBlock from '@/components/MarkdownComponents/CodeBlock.jsx'
 import { h1Link, h2Link } from '@/components/MarkdownComponents/HeaderLinks.jsx'
@@ -9,7 +9,6 @@ import '@/styles/codeBlock.css'
 import '@/styles/markdown.css'
 import Sidebar from './TableOfContents'
 import DocumentListSideBar from './DocumentListSideBar'
-import BackToTopButton from '../BackToTopButton'
 
 export default function DocumentationRenderer({ frontmatter, source, toc, documentList }) {
   const customComponents = {
@@ -20,30 +19,41 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
     }
   
   return (
-    <Container disableGutters maxWidth="false" sx={{
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      m: 0,
-      p: 0,
-      px: 2,
-      mt: 3,
-      width: '100%',
-    }}>
-      <DocumentListSideBar documentList={documentList} style={{ width: '40%' }} />
-      <Box sx={{ flexGrow: 1, px: 2 }}>    
-        <Paper className="markdown-body" sx={{ marginTop: 3, px: 2, flexGrow: 1 }}>
-          <Typography variant="h4" gutterBottom>
-          {frontmatter.title}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary" gutterBottom sx={{ml: 2}}>
-          {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString() : ""}
-        </Typography>
-          <MDXRemote {...source} components={customComponents} />
-        </Paper>
+    <>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        m: 0,
+        p: 0,
+        px: 2,
+        mt: 3,
+        width: '100%',
+        position: 'relative',
+      }}>
+        <DocumentListSideBar documentList={documentList}/>
+        <Box sx={{ 
+          flexGrow: 1, 
+          px: 2,
+          minWidth: 0, // Prevents flex item from overflowing
+        }}>    
+          <Paper className="markdown-body" sx={{
+            flexGrow: 1,
+            width: {xxs: '80vw', md: '90vw', lg: '100%'},
+            mx: 'auto',
+          }}>
+            <Typography variant="h1" sx={{margin: 0}}>
+              {frontmatter.title}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary" gutterBottom sx={{ml: 2}}>
+              {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString() : ""}
+            </Typography>
+            <MDXRemote {...source} components={customComponents} />
+          </Paper>
+        </Box>
+        <Sidebar toc={toc} />
       </Box>
-      <Sidebar toc={toc} style={{ width: '25%' }} />
-      <BackToTopButton />
-    </Container>
+      
+    </>
   )
 }

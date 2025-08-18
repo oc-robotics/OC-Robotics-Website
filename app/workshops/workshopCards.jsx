@@ -61,20 +61,19 @@ export default function WorkshopCards({ workshop, targetId }) {
           title={workshop.title}
           subheader={workshop.date}
           sx={{
-
-            minHeight: '6em',
+            height: '4em',
             p: 0,
             pl: 1,
           }}
         />
-        <Typography variant="body2" color="text.secondary"sx={{
+        <Typography variant="body1" color="text.primary" sx={{
           height: '6em',
-          lineHeight: '2em',
+          lineHeight: '1.5em',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           display: '-webkit-box',
           WebkitBoxOrient: 'vertical',
-          WebkitLineClamp: 3,
+          WebkitLineClamp: 4,
         }}>
           {workshop.description}
         </Typography>

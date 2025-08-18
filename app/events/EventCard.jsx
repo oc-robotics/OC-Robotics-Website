@@ -1,6 +1,6 @@
 'use client'
 import { Tooltip, Typography, Box, CardContent, Card, Chip, Button } from "@mui/material";
-import { CalendarMonth, LocationPin } from "@mui/icons-material";
+import { CalendarMonth, Circle, LocationPin } from "@mui/icons-material";
 
 export default function EventCard({ event }) {
   const startDate = new Date(event.start);
@@ -105,6 +105,7 @@ export default function EventCard({ event }) {
 
   return (
     <Card sx={{
+      width: '100%',
       mb: 2,
       borderLeft: '4px solid',
       borderColor: color,
@@ -128,13 +129,23 @@ export default function EventCard({ event }) {
             {event.title}
           </Typography>
           <Box sx={{
-            display: 'flex',
+            display: {xxs: 'none', sm: 'flex'},
             alignItems: 'center',
             justifyContent: 'center',
             mt: 1,
             gap: 2
           }}>
+            <Circle
+              sx={{
+                width: '1.2rem',
+                height: '1.2rem',
+                color: color,
+                borderRadius: '50%',
+                display: {xxs: 'block', calendar: 'none'}
+              }}
+            />
             <Chip label={type} variant="outlined" sx={{
+              display: {xxs: 'none', calendar: 'flex'},
               borderColor: color,
               backgroundColor: `${color}10`,
               color: color,
@@ -152,7 +163,7 @@ export default function EventCard({ event }) {
                   transition: 'transform 0.2s, color 0.2s',
                   fontSize: '2rem',
                   '&:hover': {
-                    color: 'secondary.main',
+                    color: color,
                     transform: 'scale(1.1)',
                   },
                 }}
@@ -168,7 +179,7 @@ export default function EventCard({ event }) {
                   transition: 'transform 0.2s, color 0.2s',
                   fontSize: '2rem',
                   '&:hover': {
-                    color: 'secondary.main',
+                    color: color,
                     transform: 'scale(1.1)',
                   },
                 }} 

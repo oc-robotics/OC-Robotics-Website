@@ -1,24 +1,54 @@
-import React from 'react';
-import { List, ListItem, Typography } from '@mui/material';
+'use client'
+import React, { useState } from 'react';
+import { List, ListItem, Typography, Drawer, IconButton, Box, Tooltip, Grow } from '@mui/material';
+import { Toc, Close } from '@mui/icons-material';
 import Link from 'next/link';
 
 export default function Sidebar({ toc }) {
-  return (
-    <List sx={{
-      width: '20%',
-      borderRadius: 1,
-      maxHeight: 'calc(100vh - 64px)',
-      position: 'sticky',
-      top: 64,
-      px: 1
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const tocContent = (
+    <Box sx={{ 
+      width: { xxs: 280, sm: 300 }, // Fixed width for mobile/tablet
+      padding: 2,
+      height: '100%',
+      overflowY: 'auto',
     }}>
-      <ListItem sx={{ px: 0, py: '4px' }}>
-        <Typography variant="h6" sx={{ margin: 0, p: 0 }}>Table of Contents</Typography>
-      </ListItem>
-      {toc.map(({ id, text, level }, idx) => (
-        text && level < 3 && (
-          <ListItem key={id || idx} style={{ marginLeft: level * 16 }} sx={{px: 0, py: '4px'}}>
-              <Link href={`#${id}`} 
+      <Box sx={{ 
+        display: { xxs: 'flex', lg: 'none' }, 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        mb: 2 
+      }}>
+        <Typography variant="h6">Table of Contents</Typography>
+        <IconButton onClick={handleDrawerToggle}>
+          <Close />
+        </IconButton>
+      </Box>
+
+      <Typography variant="h6" gutterBottom sx={{ display: { xxs: 'none', lg: 'block' } }}>
+        Table of Contents
+      </Typography>
+
+      <List sx={{ padding: 0 }}>
+        {toc.map(({ id, text, level }, idx) => (
+          text && level < 3 && (
+            <ListItem
+              key={id || idx}
+              sx={{
+                px: 0,
+                py: '6px',
+                ml: `${level * 13}px`,
+                maxWidth: 'calc(100% - 12px)',
+                overflow: 'hidden',
+              }}
+            >
+              <Link 
+                href={`#${id}`} 
                 onClick={e => {
                   e.preventDefault();
                   const el = document.getElementById(id);
@@ -28,6 +58,7 @@ export default function Sidebar({ toc }) {
                       window.location.hash = id;
                     }, 400);
                   }
+                  setMobileOpen(false); // Close drawer on link click
                 }}
                 style={{
                   textDecoration: 'none',
@@ -35,12 +66,13 @@ export default function Sidebar({ toc }) {
                   cursor: 'pointer',
                 }}
               >
-                <Typography variant="body2" id={id} sx={{ 
+                <Typography variant="body2" sx={{ 
                   margin: 0,
                   p: 0,
                   position: 'relative',
                   display: 'inline-block',
-                  overflow: 'wrap',
+                  textOverflow: 'wrap',
+                  fontSize: '0.8rem',
                   '&::after': {
                     content: '""',
                     position: 'absolute',
@@ -48,7 +80,7 @@ export default function Sidebar({ toc }) {
                     left: 0,
                     width: 0,
                     height: '2px',
-                    backgroundColor: "black",
+                    backgroundColor: "secondary.main",
                     transition: 'width 0.3s ease-in-out',
                   },
                   '&:hover::after': {
@@ -58,9 +90,74 @@ export default function Sidebar({ toc }) {
                   {text}
                 </Typography>
               </Link>
-          </ListItem>
-        )
-      ))}
-    </List>
-  )
+            </ListItem>
+          )
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <>
+      {/* Mobile menu button - only render when properly positioned */}
+      <Tooltip title="Open Table Of Contents" arrow>
+        <Grow in={!mobileOpen}>
+          <Toc
+            onClick={handleDrawerToggle}
+            sx={{
+              display: { xxs: mobileOpen ? 'none' : 'block', lg: 'none' },
+              position: 'fixed',
+              top: 80,
+              right: 16,
+              zIndex: 1300,
+              backgroundColor: 'background.paper',
+              width: 45,
+              height: 45,
+              borderRadius: '50%',
+              p: '5px',
+              boxShadow: 2,
+              cursor: 'pointer',
+              transition: 'display 0.3s ease-in-out',
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              }
+            }}
+          />
+        </Grow>
+      </Tooltip>
+
+      {/* Mobile drawer */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        anchor="right"
+        ModalProps={{
+          keepMounted: true, // Better mobile performance
+        }}
+        sx={{
+          display: { xxs: 'block', lg: 'none' },
+          '& .MuiDrawer-paper': {
+            width: { xxs: 280, sm: 300 },
+            backgroundColor: 'background.paper',
+          },
+        }}
+      >
+        {tocContent}
+      </Drawer>
+
+      {/* Desktop sidebar */}
+      <Box sx={{
+        display: { xxs: 'none', lg: 'block' },
+        width: 300, // Fixed width for desktop
+        position: 'sticky',
+        top: 16,
+        height: 'calc(100vh - 32px)',
+        overflowY: 'auto',
+        flexShrink: 0, // Prevents shrinking
+      }}>
+        {tocContent}
+      </Box>
+    </>
+  );
 }

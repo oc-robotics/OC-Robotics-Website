@@ -15,7 +15,6 @@ export const h1Link = ({ id, ...rest }) => {
             <Box sx={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: 2,
                 '& a': {
                     textDecoration: 'none',
                     color: 'inherit',

@@ -1,5 +1,6 @@
 'use client'
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography, Chip, Card, CardContent } from "@mui/material";
+import { Circle } from "@mui/icons-material";
 
 export default function UpdateTag({ blog }) {
   const tags = (blog.tags).toString().split(',').map(tag => tag.trim());
@@ -21,61 +22,67 @@ export default function UpdateTag({ blog }) {
   }
 
   return (
-    <Box sx={{
+    <Card elevation={7} sx={{
       width: '100%',
-      minHeight: '250px',
-      p: 3,
-      pr: 0,
-      mx: 'auto',
-      borderInlineStart: '6px solid',
+      mb: 2,
+      borderLeft: '4px solid',
       borderColor: 'secondary.main',
-      boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.4)',
+      boxShadow: 2,
       borderRadius: 2,
-      my: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      gap: 2
+      transition: 'transform 0.2s, box-shadow 0.2s',
+      '&:hover': {
+        boxShadow: 4,
+        transform: 'translateY(-2px)'
+      }
     }}>
-      <Box sx={{
+      <CardContent sx={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: {xxs: 'column', sm: 'row'},
         alignItems: 'flex-start',
       }}>
         <Box sx={{ 
-          width: '30%',
-          height: '250px',
+          width: {xxs: '100%', sm: '35%'},
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: {xxs: 'row', sm: 'column'},
           justifyContent: 'space-between',
           alignItems: 'flex-start',
           pr: 2
         }}>
           <Box sx={{mb: 1}}>
-            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{blog.title}</Typography>
+            <Typography variant="h2" sx={{ fontWeight: 'bold' }}>{blog.title}</Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>Updated By: {blog.author}</Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>{blog.date}</Typography>
           </Box>
-          <Box sx={{ mt: 1 }}>
+          <Box sx={{ mt: 1, display: 'flex', alignItems: 'center', flexDirection: {xxs: 'row', sm: 'column'}}}>
             {tags.map((tag, index) => (
-              <Chip
-                key={index}
-                label={tag}
-                variant="outlined"
-                sx={{
-                  m: 0.5,
-                  borderColor: getChipColor(tag),
+              <Box key={index}>
+                <Chip
+                  label={tag}
+                  variant="outlined"
+                  sx={{
+                    display: { xxs: 'none', sm: 'flex' },
+                    m: 0.5,
+                    borderColor: getChipColor(tag),
+                    color: getChipColor(tag),
+                    backgroundColor: `${getChipColor(tag)}25`
+                  }} 
+                />
+                <Circle sx={{ 
+                  display: { xxs: 'flex', sm: 'none' },
+                  width: {xxs: 12, xs: 20},
+                  height: {xxs: 12, xs: 20},
                   color: getChipColor(tag),
-                  backgroundColor: `${getChipColor(tag)}15`
+                  m: 0.5,
                 }} />
+              </Box>
             ))}
           </Box>
         </Box>
-        <Box sx={{ width: '70%', pr: 2 }}>
-          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Description: </Typography>
+        <Box sx={{ width: '60%', pr: 2 }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Description: </Typography>
           <Typography variant="body1" sx={{ whiteSpace: 'pre-line' }}>{blog.description}</Typography>
         </Box>
-      </Box>
-    </Box>
+      </CardContent>
+    </Card>
   );
 }
