@@ -31,11 +31,12 @@ function Navbar() {
   const menuItems = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
-    { label: 'Events', href: '/events' },
     { label: 'Updates', href: '/updates' },
+    { label: 'Events', href: '/events' },
     { label: 'Projects', href: '/projects' },
     { label: 'Workshops', href: '/workshops' },
-    { label: 'Pages', href: '/pages' },
+    { label: 'Images', href: '/images' },
+    { label: 'Documents', href: '/pages' },
     { label: 'Contact', href: '/contact' },
   ];
 
