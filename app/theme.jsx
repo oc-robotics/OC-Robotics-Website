@@ -15,6 +15,14 @@ let theme = createTheme({
       disabled: '#c0c0c0',
     },
     divider: '#a5a5a5',
+    subteams: {
+      software: { main: '#d21919', lowOpacity: '#d21919' + '20' },
+      mechanical: { main: '#08cdeb', lowOpacity: '#08cdeb' + '20' },
+      business: { main: '#29eb66', lowOpacity: '#29eb66' + '20' },
+      electrical: { main: '#ffd700', lowOpacity: '#ffd700' + '20' },
+      club: { main: '#c8732c', lowOpacity: '#c8732c' + '20' },
+      default: { main: '#9e9e9e', lowOpacity: '#9e9e9e' + '20' },
+    }
   },
   breakpoints: {
     values: {
@@ -22,9 +30,11 @@ let theme = createTheme({
       xs: 350,
       sm: 500,
       events: 550,
+      projects: 750,
       workshop: 700,
       calendar: 700,
       md: 900,
+      navbar: 1000,
       tableOfContents: 1050,
       lg: 1280,
       xl: 1920,
@@ -67,6 +77,12 @@ let theme = createTheme({
       fontWeight: 800,
       lineHeight: 1.5,
       letterSpacing: '0.01562em',
+    },
+    documentLinks: {
+      fontSize: '1rem',
+      fontWeight: 700,
+      lineHeight: 1.1,
+      letterSpacing: '0.018em'
     },
     body1: {
       fontSize: '1rem',

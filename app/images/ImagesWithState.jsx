@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Box, 
   Typography, 
@@ -10,10 +10,7 @@ import {
   Chip,
   Paper,
   ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  IconButton,
-  Skeleton
+  ImageListItem
 } from '@mui/material';
 import ImageCard from './ImageCard';
 
