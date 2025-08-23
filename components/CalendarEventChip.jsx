@@ -149,7 +149,7 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
           zIndex: 1000, 
           maxWidth: 400,
           maxHeight: '40vh',
-          right: 12,
+          left: 12,
           bottom: 36,
           mt: 1,
           borderLeft: '4px solid',
