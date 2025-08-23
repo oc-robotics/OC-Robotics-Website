@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Typography, Grid, Paper, Slide, Box } from "@mui/material";
+import { Typography, Grid, Paper, Slide, Box, Button } from "@mui/material";
+import { CalendarMonth, CloudDownload } from "@mui/icons-material";
 import CalendarEventChip from "./CalendarEventChip";
 
 export default function CalendarWithState({ events, workshops }) {
@@ -108,9 +109,72 @@ export default function CalendarWithState({ events, workshops }) {
       my: 2,
       p: 2
     }}>
-      <Typography variant="h2" gutterBottom>
-        {monthNames[currentMonth]} {currentYear}
-      </Typography>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        mb: 1
+      }}>
+        <Typography variant="h2" gutterBottom>
+          {monthNames[currentMonth]} {currentYear}
+        </Typography>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 2
+        }}>
+          <Button 
+            variant="outlined" 
+            onClick={() => {
+              window.open('https://calendar.google.com/calendar/u/0/r/month/2025/4/1?cid=b2Nyb2JvdGljc2dyb3VwQGdtYWlsLmNvbQ&pli=1', "__blank")
+            }} 
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 1,
+              color: 'secondary.main',
+              borderColor: 'secondary.main',
+              height: '40px',
+              borderRadius: '20px',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                color: 'white',
+                borderColor: 'none',
+                bgcolor: 'secondary.main',
+              }
+            }}
+          >
+            <CloudDownload />Subscribe
+          </Button>
+          <Button 
+            variant="outlined" 
+            onClick={() => {
+              window.open('https://calendar.google.com/calendar/u/2/r', '__blank')
+            }} 
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 1,
+              color: 'secondary.main',
+              borderColor: 'secondary.main',
+              height: '40px',
+              borderRadius: '20px',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                color: 'white',
+                borderColor: 'none',
+                bgcolor: 'secondary.main',
+              }
+            }}
+          >
+            <CalendarMonth />Google Calendar
+          </Button>
+        </Box>
+      </Box>
       <Grid 
         container 
         spacing={1} 

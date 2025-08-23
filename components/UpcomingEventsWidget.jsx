@@ -180,13 +180,14 @@ export default async function UpcomingEventsWidget({ count }) {
           p: 1,
           width: 'auto',
           height: '40px',
-          borderRadius: '20px',
           borderColor: 'secondary.main',
           color: 'secondary.main',
-          transition: 'scale 0.3s',
+          transition: 'all 0.3s ease',
           '&:hover': {
             cursor: 'pointer',
-            scale: 1.2,
+            color: 'white',
+            border: 'none',
+            bgcolor: 'secondary.main',
           },
         }}>
           View all events →
