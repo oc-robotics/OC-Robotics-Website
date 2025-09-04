@@ -12,11 +12,11 @@ import DocumentListSideBar from './DocumentListSideBar'
 
 export default function DocumentationRenderer({ frontmatter, source, toc, documentList }) {
   const customComponents = {
-      Admonitions,
-      pre: (props) => <CodeBlock {...props} />,
-      h1: h1Link,
-      h2: h2Link,
-    }
+    Admonitions,
+    pre: (props) => <CodeBlock {...props} />,
+    h1: h1Link,
+    h2: h2Link,
+  }
   
   return (
     <>
@@ -39,7 +39,7 @@ export default function DocumentationRenderer({ frontmatter, source, toc, docume
         }}>    
           <Paper className="markdown-body" sx={{
             flexGrow: 1,
-            width: {xxs: '80vw', md: '90vw', lg: '100%'},
+            width: {xs: '80vw', md: '90vw', lg: '100%'},
             mx: 'auto',
           }}>
             <Typography variant="h1" sx={{margin: 0}}>

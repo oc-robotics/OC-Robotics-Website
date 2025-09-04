@@ -107,7 +107,7 @@ export default function CalendarWithState({ events, workshops }) {
   return (
     <Paper elevation={3} sx={{
       my: 2,
-      p: 2
+      p: 2,
     }}>
       <Box sx={{
         display: 'flex',
@@ -193,7 +193,7 @@ export default function CalendarWithState({ events, workshops }) {
       >
         {days.map((day, index) => (
           <Grid size={1} key={index} sx={{ textAlign: 'center' }}>
-            <Typography variant="h6">{day}</Typography>
+            <Typography variant="h6" sx={{fontSize: {xxs: '0.65rem', xs: '1rem'}}}>{day}</Typography>
           </Grid>
         ))}
         {calendarDays.map((dayObj, index) => {

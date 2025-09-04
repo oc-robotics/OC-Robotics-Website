@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { Box, Typography, List, ListItem, Drawer, IconButton, Tooltip, Grow } from '@mui/material';
 import { ViewSidebar, Close } from '@mui/icons-material';
 import Link from 'next/link';
+import ScrollTracker from '../scrollbar.jsx';
 
 function DocumentListSideBar({ documentList }) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -17,7 +17,7 @@ function DocumentListSideBar({ documentList }) {
       width: { xxs: 280, sm: 300 }, // Fixed width for mobile/tablet
       padding: 2,
       height: '100%',
-      overflowY: 'auto',
+      overflow: 'hidden',
     }}>
       <Box sx={{ 
         display: { xxs: 'flex', lg: 'none' }, 
@@ -25,33 +25,74 @@ function DocumentListSideBar({ documentList }) {
         alignItems: 'center',
         mb: 2 
       }}>
-        <Typography variant="h6">
+        <Typography variant="h4" sx={{fontSize: '2rem'}}>
           Document List
         </Typography>
         <IconButton onClick={handleDrawerToggle}>
           <Close />
         </IconButton>
       </Box>
-      
-      <Typography variant="h6" gutterBottom sx={{ display: { xxs: 'none', lg: 'block' } }}>
+
+      <Typography variant="h4" gutterBottom sx={{ display: { xxs: 'none', lg: 'block' } }}>
         Document List
       </Typography>
       
-      <List sx={{ listStyleType: 'none', padding: 0 }}>
-        {documentList.map((doc, index) => (
-          <ListItem key={index} sx={{ marginBottom: '10px', pl: 2 }}>
-            <Link 
-              href={`/pages/${doc.slug}`} 
-              style={{ textDecoration: 'none', color: 'inherit' }}
-              onClick={() => setMobileOpen(false)} // Close drawer on link click
-            >
-              <Typography variant="body2">
-                {doc.frontmatter.title || doc.slug}
-              </Typography>
-            </Link>
-          </ListItem>
-        ))}
-      </List>
+      <Box sx={{
+        height: 'calc(100% - 100px)',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        '&::-webkit-scrollbar': {
+          width: '8px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: 'secondary.main',
+          borderRadius: '4px',
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        },
+        '&::-webkit-scrollbar-track': {
+          backgroundColor: 'transparent',
+        },
+        '&::-webkit-scrollbar-thumb:active': {
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        },
+      }}>
+        <List sx={{ listStyleType: 'none', padding: 0 }}>
+          {documentList.map((doc, index) => (
+            <ListItem key={index} sx={{ marginBottom: '10px', pl: 2 }}>
+              <Link 
+                href={`/pages/${doc.slug}`} 
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                onClick={() => setMobileOpen(false)} // Close drawer on link click
+              >
+                <Typography variant="documentLinks" sx={{
+                  margin: 0,
+                  p: 0,
+                  position: 'relative',
+                  display: 'inline-block',
+                  textOverflow: 'wrap',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: 0,
+                    height: '2px',
+                    backgroundColor: "secondary.main",
+                    transition: 'width 0.3s ease-in-out',
+                  },
+                  '&:hover::after': {
+                    width: '100%',
+                  }
+                }}>
+                  {doc.frontmatter.title || doc.slug}
+                </Typography>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
     </Box>
   );
 

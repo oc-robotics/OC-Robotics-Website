@@ -7,10 +7,13 @@ export const h1Link = ({ id, ...rest }) => {
     const [copied, setCopied] = useState(false);
     if (id) {
         const handleCopy = () => {
-            navigator.clipboard.writeText(window.location.origin + window.location.pathname + `#${id}`);
+            navigator.clipboard.writeText(
+                window.location.origin + window.location.pathname + `#${id}`
+            );
             setCopied(true);
             setTimeout(() => setCopied(false), 1200);
         };
+
         return (
             <Box sx={{
                 display: 'flex',
@@ -45,9 +48,11 @@ export const h2Link = ({ id, ...rest }) => {
     const [copied, setCopied] = useState(false);
     if (id) {
         const handleCopy = () => {
-            navigator.clipboard.writeText(window.location.origin + window.location.pathname + `#${id}`);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1200);
+            if (typeof window !== 'undefined' && navigator?.clipboard) {
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + `#${id}`);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1200);
+            }
         };
         return (
             <Box sx={{

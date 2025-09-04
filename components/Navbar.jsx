@@ -18,7 +18,7 @@ import Link from 'next/link';
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('navbar'));
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
