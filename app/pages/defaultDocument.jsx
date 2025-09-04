@@ -1,6 +1,5 @@
 'use client';
 import { Container, Card, CardContent, Typography, Box } from "@mui/material";
-import BackToTopButton from "@/components/BackToTopButton";
 
 function DefaultDocument({ documentList }) {
   return (
@@ -34,7 +33,6 @@ function DefaultDocument({ documentList }) {
         );
       })}
       </Box>
-      <BackToTopButton />
     </Container>
   );
 }

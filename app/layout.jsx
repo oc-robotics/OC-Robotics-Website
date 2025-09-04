@@ -2,9 +2,8 @@ import React from 'react'
 import ClientThemeProvider from '@/components/ClientThemeProvider'
 import Footer from '@/components/Footer'
 import NavBar from '@/components/Navbar'
-import { Container, Box } from '@mui/material'
+import { Container } from '@mui/material'
 import BackToTopButton from '@/components/BackToTopButton'
-import '@/styles/scrollbar.css'
 import ScrollProgressBar from '@/components/scrollbar'
 
 export const metadata = {

@@ -149,9 +149,11 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
           zIndex: 1000, 
           maxWidth: 400,
           maxHeight: '40vh',
-          right: 12,
+          left: 12,
           bottom: 36,
           mt: 1,
+          borderLeft: '4px solid',
+          borderColor: color
         }}>
           <CardContent>
             <Box sx={{
@@ -192,13 +194,13 @@ const CalendarEventChip = ({ event, id, isAllDay, eventStart, eventEnd, eventLoc
               alignItems: 'flex-start',
               justifyContent: 'flex-start'
             }}>
-              <Typography variant="h6" sx={{mb: 2}}>
+              <Typography variant="h4" sx={{mb: 2}}>
                 {event.title}
               </Typography>
               <Typography variant="body2">
                 {isAllDay ? 'All Day' : `${formatDate(eventStart)}, ${formatTime(eventStart)} - ${formatTime(eventEnd)}`}
               </Typography>
-              <Typography variant="body2">
+              <Typography variant="body2" sx={{textAlign: 'left'}}>
                 {formatLocation(eventLocation)}
               </Typography>
               <Divider sx={{ my: 1, width: '100%', borderColor: '#ccc' }} />
